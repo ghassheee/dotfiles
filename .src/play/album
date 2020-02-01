@@ -1,0 +1,15 @@
+#!/bin/zsh
+
+set +u
+
+cd $MUSIC/
+ALBUMPID="$$"
+echo $ALBUMPID
+export ALBUMPID
+for i in $(grep -rnw '.' -e "$1" | awk '{print $3}' | sort -R );
+do
+ffplay $i -autoexit -nodisp
+done
+
+set -u
+

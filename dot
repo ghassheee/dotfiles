@@ -1,0 +1,111 @@
+#!/bin/sh
+
+[[ "$DOT" == "" ]] && DOT=$HOME/ghasshee/dotfiles
+source $DOT/.env.zsh
+deploy(){
+    echo "Deploying $DOT/.src files into $DOT/.bin  ..."
+    cd $DOT/.bin
+    ls | while read line ; do 
+        [[ -L $line ]] && unlink $line; 
+    done
+
+    cd $DOT/.src
+    ls -d */* | while read line;
+    do
+        if   [ -d $line ]; then 
+            echo "WARNING: $line is directory, skipping ...";
+        elif [ -x $line ]; then
+            echo "  deploying $line"
+            ln -s $DOT/.src/$line $DOT/.bin/
+        fi
+    done
+    echo "Done."
+}
+
+install(){
+## [ -d ~/.vim ] || git clone https://www.github.com/ghassheee/vimrc ~/.vim
+[[ -d ~/Dropbox      ]] && ln -s ~/Dropbox ~/Desktop/
+[[ -f ~/.private.zsh ]] || echo 'MOUNT="" ## configure!' > ~/.private.zsh 
+
+[[ `uname` == 'Linux'  ]] && OPTION="sfn"
+[[ `uname` == 'Darwin' ]] && OPTION="sfh"
+
+ln -$OPTION $DOT/.oh-my-zsh         $HOME/.oh-my-zsh
+ln -$OPTION $DOT/.color.zsh         $HOME/.color.zsh
+ln -$OPTION $DOT/.function.zsh      $HOME/.function.zsh
+ln -$OPTION $DOT/.vimrc             $HOME/.vimrc
+ln -$OPTION $DOT/.vim               $HOME/.vim  
+ln -$OPTION $DOT/.zshrc             $HOME/.zshrc
+ln -$OPTION $DOT/.env.zsh           $HOME/.env.zsh
+ln -$OPTION $DOT/.path.zsh          $HOME/.path.zsh
+ln -$OPTION $DOT/.alias.zsh         $HOME/.alias.zsh
+ln -$OPTION $DOT/.macos.zsh         $HOME/.macos.zsh
+ln -$OPTION $DOT/.linux.zsh         $HOME/.linux.zsh
+ln -$OPTION $DOT/.ipban.zsh         $HOME/.ipban.zsh
+ln -$OPTION $DOT/.language.zsh      $HOME/.language.zsh 
+ln -$OPTION $DOT/.ocamlinit         $HOME/.ocamlinit    
+ln -$OPTION $DOT/.ghci              $HOME/.ghci
+ln -$OPTION $DOT/.stardict          $HOME/.stardict
+ln -$OPTION $DOT/.bin               $HOME/.bin 
+ln -$OPTION $DOT/.src               $HOME/.src
+ln -$OPTION $DOT/.dot               $HOME/.bin/dot
+ln -$OPTION $DOT/.tmux              $HOME/.tmux
+ln -$OPTION $DOT/.tmux.conf         $HOME/.tmux.conf
+ln -$OPTION $DOT/.tmux.linux.conf   $HOME/.tmux.linux.conf
+ln -$OPTION $DOT/.tmux.macos.conf   $HOME/.tmux.macos.conf
+
+if [[ `uname` == "Linux" ]] ; then
+ln -$OPTION $DOT/.Xmodmap           $HOME/.Xmodmap
+ln -$OPTION $DOT/.xinitrc           $HOME/.xprofile
+ln -$OPTION $DOT/.festivalrc        $HOME/.festivalrc
+fi
+}
+
+uninstall(){
+if ! [ -d "$HOME/.oh-my-zsh" ] ; then
+	sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+	mv $HOME/.zshrc $HOME/.zshrc.old
+fi
+
+unlink $HOME/.color.zsh
+unlink $HOME/.vimrc
+unlink $HOME/.vim_runtime
+unlink $HOME/.zshrc
+unlink $HOME/.zshenv
+unlink $HOME/.env.zsh
+unlink $HOME/.path.zsh
+unlink $HOME/.alias.zsh
+unlink $HOME/.macos.zsh
+unlink $HOME/.linux.zsh
+unlink $HOME/.lanugage.zsh
+unlink $HOME/.src 
+unlink $HOME/.bin
+
+if [ `uname` == "Linux" ] ; then
+    unlink $HOME/.Xmodmap
+    unlink $HOME/.xinitrc
+fi
+}
+
+clean(){
+    rm -rf ~/.bash_history
+    rm -rf ~/.bashrc
+    rm -rf ~/.cache
+}
+
+if   [[ $1 == "install"     ]] ; then 
+    install
+elif [[ $1 == "uninstall"   ]] ; then
+    uninstall
+elif [[ $1 == "deploy"      ]] ; then
+    deploy
+elif [[ $1 == "clean"       ]] ; then 
+    clean 
+elif [[ $1 == "push"        ]] ; then 
+    cd $DOT; git add --all; git commit -m "Updated"; git push;
+elif [[ $1 == "pull"        ]] ; then 
+    cd $DOT; git pull && deploy 
+else 
+    echo "usage: ./dot install(uninstall)"
+fi
+

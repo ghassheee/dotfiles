@@ -1,0 +1,27 @@
+
+select-pane -t 0
+split-window -h
+select-pane -t 1
+split-window -v
+split-window -v
+
+#setw main-pane-width 70
+#select-layout main-vertical
+
+display-panes
+
+resize-pane -R -t 0 28
+resize-pane -U -t 1 12
+resize-pane -D -t 2 4
+
+send-keys -t 1 'clock' enter
+send-keys -t 0 'sleep 0.1' enter
+send-keys -t 0 'cd ~/ghasshee/ghassheee.github.io' enter
+send-keys -t 0 'clear' enter
+send-keys -t 0 'atom .' enter 
+send-keys -t 2 'cd ~/ghasshee/ghassheee.github.io && jekyll serve' enter
+# send-keys -t 2 'cd ~/ghasshee/ghassheee.github.io && jekyll serve -H $LOCAL_IP' enter
+send-keys -t 3 'cd ~/ghasshee/ghassheee.github.io/ && ls' enter
+send-keys -t 3 'while true; do echo "           B L O G " | figlet | lolcat -a; sleep 5; done ' enter 
+
+select-pane -t 0

@@ -1,0 +1,24 @@
+select-pane -t 0
+split-window -h
+select-pane -t 1
+split-window -v
+
+#setw main-pane-width 75
+#select-layout main-vertical
+
+display-panes
+
+resize-pane -R -t 0 26
+resize-pane -U -t 2 12
+
+
+send-keys -t 1 'clock' enter
+send-keys -t 0 'cd $JAVASCRIPT && ll' enter
+send-keys -t 2 'cd $JAVASCRIPT/node' enter
+send-keys -t 2 'node' enter
+
+
+bind-key > save-buffer ~/.tmux-buffer \; run-shell 'pbcopy < ~/.tmux-buffer' \; display-message "Copied to clipboard."
+bind-key < if-shell 'pbcopy > ~/.tmux-buffer' 'load-buffer ~/.tmux-buffer ; paste-buffer'
+
+select-pane -t 0

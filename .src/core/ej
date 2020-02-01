@@ -1,0 +1,27 @@
+#!/bin/sh
+
+METHOD=$1
+PARAM=""
+for i in $@
+do 
+    if [[ $i = $METHOD ]]
+        then
+            continue;
+        else 
+        if [[ $PARAM != "" ]]  
+        then 
+            PARAM=$PARAM,$i
+        else
+            PARAM=$i
+        fi
+    fi
+done 
+
+PARAM="[$PARAM]"
+DATA="{\"jsonrpc\":\"2.0\",\"method\":\"$METHOD\",\"params\":$PARAM,\"id\":67}" 
+HOST="http://localhost:8545"
+
+
+
+curl -X POST -H 'Content-Type:application/json' --data $DATA $HOST
+

@@ -1,0 +1,55 @@
+#!/bin/sh
+
+final () {
+    [[ "$(jobs -p)" == "" ]] || for i in "$(jobs -p)"; do
+            kill $i 2>/dev/null || echo "error: $i does not exist.";
+        done &&  
+    echo "stopwatch is done."
+}
+set -e
+trap final EXIT 
+
+
+echo "stopwatch     : $$"
+
+S=0; SS=0
+M=0; MM=0
+H=0; HH=0
+echo -n "TIME          : "
+while [[ $HH -lt "10" ]]; do
+    echo -en "$HH"
+    while [[ $H -lt "6" ]]; do
+        echo -en "$H:"
+        while [[ $MM -lt "6" ]]; do
+            echo -en "$MM"
+            while [[ $M -lt "10" ]]; do
+                echo -en "$M:"
+                while [[ $SS -lt "6" ]]; do
+                    echo -en "$SS"
+                    while [[ $S -lt "10" ]]; do
+                        echo -en "$S"
+                        echo -en "\b"
+                        sleep 1
+                        S=$[$S+1]
+                    done
+                    echo -en "\b"
+                    S=0
+                    SS=$[$SS+1]
+                done
+                echo -en "\b\b"
+                SS=0
+                M=$[$M+1]
+            done
+            echo -en "\b"
+            M=0
+            MM=$[$MM+1]
+        done
+        echo -en "\b\b"
+        MM=0;
+        H=$[$H+1]
+    done
+    echo -en "\b"
+    H=0
+    HH=$[$HH+1]
+done
+

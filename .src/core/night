@@ -1,0 +1,18 @@
+### night version 0.1 
+# 
+# night is a super-simple unix shell 
+#
+# +---------------+--------------+
+# | 09:00 ~ 17:59 | return False |
+# | 18:00 ~ 08:59 | return True  |
+# +---------------+--------------+
+#
+
+#!/usr/bin/zsh
+
+OCLOCK=$(date | awk '{print $4}' | sed 's/\:.*//' | sed 's/^0//' )
+if [[ $OCLOCK -ge 9  ]] && \
+   [[ $OCLOCK -le 17 ]]  
+    then echo "daytime"; exit -1;
+    else echo "night"; exit 0;
+fi 

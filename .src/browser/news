@@ -1,0 +1,6 @@
+#!/bin/sh
+
+URL="http://so-zou.jp/web-app/news/nettv-news/"
+TIME=600
+
+$HOME/.bin/opentab-firefox $URL $TIME

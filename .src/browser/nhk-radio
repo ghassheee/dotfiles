@@ -1,0 +1,7 @@
+#!/bin/sh
+URL="https://www.nhk.or.jp/radio/player/?ch=r2"
+TIME=910
+
+amixer -c 1 -q sset 'Master' 90\%
+$HOME/.bin/opentab-firefox $URL $TIME
+amixer -c 1 -q sset 'Master' 75\%

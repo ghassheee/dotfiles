@@ -1,0 +1,29 @@
+#!/bin/sh
+
+[[ $MUSIC == "" ]]  && echo "error: $MUSIC is not set" 
+
+## final 
+ptree_of(){ ps -aef --forest 2>/dev/null | grep "$(ps -o pid= 2>/dev/null)" | grep -v "grep" | grep $1 | awk '{print $2}'; }
+final () {
+    ptree_of stopwatch | while read line; do echo "music kills $line"; kill $line 2>/dev/null || echo "error: $line not exist"; done &
+    [[ "$(jobs -p)" == "" ]] || for i in "$(jobs -p)" ; do echo "music kills $i"; pkill -9 -s $i 2>/dev/null || echo "error: $i not found"; done &&
+    echo "music is done.";
+    sleep 0.5;
+}
+set -e
+trap final EXIT 
+
+## PID 
+echo "music         : $$"
+
+## DIR
+DIR=$1 
+[[ $1 == "" ]] && DIR="cafe"
+
+## VOLUME 
+VOLUME="0.5"
+[[ $2 == "-v" ]] && VOLUME=$3
+
+
+$HOME/.bin/playrandom $MUSIC/$DIR -v $VOLUME 2>/dev/null
+

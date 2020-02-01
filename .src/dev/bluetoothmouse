@@ -1,0 +1,30 @@
+#!/bin/sh
+
+CONTROLLER_MAC_ADDRESS=00:1B:DC:0B:17:27
+MOUSE_MAC_ADDRESS=00:1F:20:99:7E:F7
+KEYBOARD_MAC_ADDRESS=70:F0:87:18:75:D3
+
+expect -c "
+spawn /bin/bluetoothctl 
+expect \"#\"
+send \"select ${CONTROLLER_MAC_ADDRESS}\n\"
+expect \"#\"
+send \"power on\n\"
+expect \"#\"
+send \"scan on\n\"
+expect \"#\"
+send \"agent on\n\"
+expect \"#\"
+send \"pair ${KEYBOARD_MAC_ADDRESS}\n\"
+expect \"#\"
+send \"connect ${KEYBOARD_MAC_ADDRESS}\n\"
+expect \"#\"
+send \"pair ${MOUSE_MAC_ADDRESS}\n\"
+expect \"#\"
+send \"connect ${MOUSE_MAC_ADDRESS}\n\"
+send \"quit\n\"
+interact
+"
+
+
+

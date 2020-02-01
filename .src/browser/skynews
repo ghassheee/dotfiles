@@ -1,0 +1,6 @@
+#!/bin/sh
+
+URL="http://news.sky.com/watch-live" 
+TIME=1800
+
+$HOME/.bin/opentab-firefox $URL $TIME

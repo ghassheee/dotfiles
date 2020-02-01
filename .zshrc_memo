@@ -1,0 +1,46 @@
+# emacs like key-binding
+# e.g. Ctrl+F,B moves cursol up
+bindkey -e 
+
+# vi like key-binding 
+bindkey -v 
+
+# enable auto-complete
+autoload -U compinit; compinit
+
+# IF the command not exists, but the directory of the name exists,
+# THEN move to the directory 
+setopt auto_cd 
+
+alias ...='cd ../..'
+alias ....='cd ../../..'
+
+# e.g. type 'cd ~hoge' 
+hash -d hoge=/usr/local/bin
+
+# pushd : directory stack 
+setopt auto_pushd
+# IF the directory has been already added to pushd stack 
+# THEN do not add 
+setopt pushd_ignore_dups
+
+# glob : enable wildcards not only '*' but also '#' '~' '^'
+setopt extended_glob
+
+# ignore duplication of history
+setopt hist_ignore_all_dups
+
+# if the command start with space ' ',
+# THEN do not add to the history 
+setopt hist_ignore_space 
+
+# <tab> + <tab> can choose from the candidates of the command  
+zstyle ':completion:*:default' menu select=1
+
+# desinate the set whose element is handled as a character
+# e.g. default - '/'
+WORDCHARS='*?_-.[]~=&;!#$^(){}<>'
+
+
+# show the bindkey list
+bindkey -L 

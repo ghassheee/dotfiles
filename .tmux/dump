@@ -1,0 +1,26 @@
+select-pane -t 0
+split-window -h
+split-window -v
+select-pane -t 2
+split-window -v
+
+#setw main-pane-width 75
+#select-layout main-vertical
+
+display-panes
+
+resize-pane -R -t 0 15
+resize-pane -U -t 0 12
+
+
+send-keys -t 1 'clock' enter
+send-keys -t 0 'cd ~/.dump' enter
+send-keys -t 0 'sudo perf top' enter
+send-keys -t 2 'cd ~/.dump' enter
+send-keys -t 3 'sudo tcpdump' enter
+
+
+bind-key > save-buffer ~/.tmux-buffer \; run-shell 'pbcopy < ~/.tmux-buffer' \; display-message "Copied to clipboard."
+bind-key < if-shell 'pbcopy > ~/.tmux-buffer' 'load-buffer ~/.tmux-buffer ; paste-buffer'
+
+select-pane -t 0

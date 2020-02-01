@@ -1,0 +1,403 @@
+#!/bin/bash
+
+#talking-clock written by Storm Dragon
+#project first created on Wednesday, March 23, 2011
+#license WTFPL: http://wtfpl.net
+
+display_help()
+{
+cat << EOF
+Talking-clock by Storm Dragon
+Talking-clock accepts the following arguments:
+--cron number:
+If you use --cron the only valid entry is a number following it. 1 will cause the clock to chime every hour, 2 every
+half-hour, 4 every quarter, and anything else will delete your existing settings if they exist.
+-a --audio Command for playing sound. The default is play -q provided from the sox package.
+-c --nochime Turn off chimes.
+-f --format: 12 or 24 hour format. Default is 12 hour time.
+-n --nospeak turn off spoken time.
+-s --soundpack Set path to soundpack. Sound packs should be in ogg format and contain 1.ogg, 2.ogg, ... 11.ogg, 12.ogg and
+ 15, 30, and 45.oggfor the quarter-hour chimes.
+-v --voice Select voice. Default is espeak other options are
+cepstral, espeak, festival, pico, speech-dispatcher and custom.
+To set a custom voice enter the command as in:
+-v 'espeak -v en-us+klatt2'
+-t --torify retrieve temperature anonymously using torify, used with -z --zipcode
+-z --zipcode postal code Used for current temperature, may not be available inn all areas.
+For complete information read the README located at /usr/share/talking-clock/README"
+EOF
+}
+
+number_to_text()
+{
+    # If the first argument is not numeric, then it is the return variable.
+    if ! [[ "$1" =~ ^[0-9]+$ ]]; then
+        local __numberVariable=$1
+        shift
+    fi
+    local number=$1
+    local digit
+    # Check for negative numbers.
+    if [ "${number:0:1}" = "-" ]; then
+        local textNumber="negative "
+        number="${number:1}"
+    else
+        local textNumber=""
+    fi
+    # This loop processes the numbers, only up to 999 for now, but can be expanded easily, I think.
+    while [ ${#number} -gt 0 ]; do
+        # To expand, add or to the if, 2 or 5 or 8, etc
+        if [ ${#number} -eq 2 ]; then
+            case $number in
+            0[1-9]) textNumber="${textNumber}and "; number="${number:1}";;
+            10)     textNumber="${textNumber}ten"           ; break;;
+            11)     textNumber="${textNumber}eleven"        ; break;;
+            12)     textNumber="${textNumber}twelve"        ; break;;
+            13)     textNumber="${textNumber}thirteen"      ; break;;
+            14)     textNumber="${textNumber}fourteen"      ; break;;
+            15)     textNumber="${textNumber}fifteen"       ; break;;
+            16)     textNumber="${textNumber}sixteen"       ; break;;
+            17)     textNumber="${textNumber}seventeen"     ; break;;
+            18)     textNumber="${textNumber}eighteen"      ; break;;
+            19)     textNumber="${textNumber}nineteen"      ; break;;
+            2*)     textNumber="${textNumber}twenty"    ;;
+            3*)     textNumber="${textNumber}thirty"    ;;
+            4*)     textNumber="${textNumber}forty"     ;;
+            5*)     textNumber="${textNumber}fifty"     ;;
+            6*)     textNumber="${textNumber}sixty"     ;; 
+            7*)     textNumber="${textNumber}seventy"   ;;
+            8*)     textNumber="${textNumber}eighty"    ;;
+            9*)     textNumber="${textNumber}ninety"    ;;
+            esac
+        fi
+        # This stops the loop if the final digit is 0 otherwise we get a repeat of the digit before, 90 becomes 99 etc.
+        if [ ${#number} -eq 2 -a ${number:$((${#number} - 1)):1} -eq 0 ]; then
+            break
+        fi
+        # Put dashes in the proper places.
+        if [ ${#number} -eq 2 -a $number -gt 20 ]; then
+            if [ $(($number % 10)) -ne 0 ]; then
+                textNumber="${textNumber}-"
+            fi
+        fi
+        # Process the correct digit based on number length.
+        case ${#number} in
+            3)  digit=${number:0:1};;
+            2)  digit=${number:$((${#number} - 1)):1};;
+            1)  digit=${number:$((${#number} - 1)):1}
+        esac
+        case $digit in 
+            1)  textNumber="${textNumber}one";;
+            2)  textNumber="${textNumber}two";;
+            3)  textNumber="${textNumber}three";;
+            4)  textNumber="${textNumber}four";;
+            5)  textNumber="${textNumber}five";;
+            6)  textNumber="${textNumber}six";;
+            7)  textNumber="${textNumber}seven";;
+            8)  textNumber="${textNumber}eight";;
+            9)  textNumber="${textNumber}nine";;
+        esac
+        # Add the correct bit to the text number, million, thousand, hundred, etc. Trim off already processed digits.
+        case ${#number} in
+            3)
+                if [ $(($number % 100)) -eq 0 ]; then
+                    textNumber="${textNumber} hundred"
+                else
+                    textNumber="${textNumber} hundred "
+                fi
+                number="${number:1}";;
+            2)  number="${number:2}";;
+            *)  number="${number:1}"
+        esac
+    done
+    # If we have a return variable set its value to the text.
+    if [ -n "$__numberVariable" ]; then
+        eval $__numberVariable="'$textNumber'"
+    # Else just echo the text.
+    else
+        echo "$textNumber"
+    fi
+}
+
+#Create or modify cron jobs
+if [ "$1" == "--cron" ] ; then
+    if [ "$#" -ne "2" ] ; then
+        echo -e "Invalid cron option:\n"\
+        "to set a cron enter:\n"\
+        "talking-clock --cron chimes-per-hour\n"\
+        "If you would like cron to chime 4 times per hour (every quarter hour) you would enter:\n"\
+        "talking-clock --cron 4\n"\
+        "Valid entries are 1, 2, and 4. Anything else causes the cron to be removed if it exists.\n"\
+        "After you have made changes you can use the command:\n"\
+        "crontab -l\n"\
+        "to view your settings."
+        exit 1
+    fi
+    crontabFile="$(mktemp)" 
+    crontab -l > "$crontabFile"
+    read -n1 -p "You are about to modify talking-clock settings. Are you sure you want to do this? (Only y or Y confirms, anything else cancels) " answer
+    echo
+    if [ "${answer^}" != "Y" ]; then
+        echo "talking-clock settings unchanged."
+        rm "$crontabFile"
+        exit 0
+    fi
+    sed -i -r '/^.*talking-clock.*$/d' "$crontabFile"
+    case "$2" in
+        "1")
+            #Chime once per hour.
+            echo "# talking-clock settings" >> "$crontabFile"
+            echo "XDG_RUNTIME_DIR=/run/user/$UID # Make talking-clock play nice with pulseaudio" >> "$crontabFile"
+            echo '0 * * * * /usr/bin/talking-clock &> /dev/null' >> "$crontabFile"
+        ;;
+        "2")
+            #Chime twice per hour.
+            echo "# talking-clock settings" >> "$crontabFile"
+            echo "XDG_RUNTIME_DIR=/run/user/$UID # Make talking-clock play nice with pulseaudio" >> "$crontabFile"
+            echo '0,30 * * * * talking-clock &> /dev/null' >> "$crontabFile"
+        ;;
+        "4")
+            #Chime four times per hour.
+            echo "# talking-clock settings" >> "$crontabFile"
+            echo "XDG_RUNTIME_DIR=/run/user/$UID # Make talking-clock play nice with pulseaudio" >> "$crontabFile"
+            echo '0,15,30,45 * * * * talking-clock &> /dev/null' >> "$crontabFile"
+    esac
+    #install the new cron file.
+    if [ -f/"$crontabFile" ]; then
+        if crontab "$crontabFile" ; then
+            echo "talking-clock settings updated."
+            rm "$crontabFile"
+            exit 0
+        else
+            echo "There was an error installing the new crontab file."
+            rm "$crontabFile"
+            exit 1
+        fi
+    else
+        echo "Couldn't create new crontab."
+        exit 1
+    fi
+    exit 0
+fi
+
+#initialize variables
+xdgPath="${XDG_CONFIG_HOME:-$HOME/.config}"
+#Check for settings files in order of importants
+if [ -f "$xdgPath/talking-clock/talking-clockrc" ] ; then
+    #Read from local settings
+    source "$xdgPath/talking-clock/talking-clockrc"
+elif [ -f "/etc/talking-clockrc" ] ; then
+    #Read from global settings
+    source "/etc/talking-clockrc"
+fi
+hour=$(date +'%-l')
+minute=$(date +'%-M')
+timeOfDay=$(date +'%p' | sed 's/AM/A M/')
+#play chimes?
+chime="${chime:-true}"
+#command used to play sounds
+soundCommand="${soundCommand:-play -qV0}"
+#default voice for speaking time is espeak
+voice="${voice:-espeak}"
+#should the time be spoken?
+speakTime="${speak:-true}"
+# Load soundpack.
+soundPack="${soundpack:-$DOT/.talking-clock}"
+# Time format
+format="${format:-12}"
+
+#Get and process commandline args which override all other settings.
+while [ $# -gt 0 ] ; do
+    case "$1" in
+        "-a" | "--audio")
+            shift
+            soundCommand="$1"
+        ;;
+        "-f" | "--format")
+            shift
+            if [ "$1" == "12" -o "$1" == "24" ] ; then
+                if [ $1 -eq 24 ] ; then
+                    format="24"
+            fi
+            else
+                echo "Invalid time format: Valid options are 12 and 24."
+                exit 1
+            fi
+        ;;
+        "-s" | "--soundpack")
+            shift
+            if [ -d "$1" ] ; then
+                soundPack="$1"
+            else
+                echo "Directory $1 does not exist."
+                exit 1
+            fi
+        ;;
+        "-n" | "--nospeak")
+            speakTime="false"
+        ;;
+        "-t" | "--torify")
+            torify="true"
+        ;;
+        "-c" | "--nochime")
+            chime="false"
+        ;;
+        "-v" | "--voice")
+            shift
+            voice="$1"
+        ;;
+        "-z" | "--zipcode")
+            shift
+            zipcode="$1"
+        ;;
+        *)
+            display_help
+            exit 0
+        esac
+    shift
+done
+
+#Speak the time
+#Safely create voice files for tts who write to file
+voiceFile="$(mktemp --tmpdir tlkclkXXXX.wav)"
+if [ "$speakTime" == "true" ] ; then
+    if [ "$minute" -eq "0" ] ; then
+        timeString="$hour o clock $timeOfDay"
+    elif [ "$minute" -lt "10" ] ; then
+        timeString="$(number_to_text $hour) o $(number_to_text $minute) $timeOfDay"
+    else
+        timeString="$(number_to_text $hour) $(number_to_text $minute) $timeOfDay"
+    fi
+    #if 24 time is set, override the above with correct settings.
+    if [ "$format" = "24" ] ; then
+        #Make it read purdy for speech synthesizers.
+        timeStringHour="$(date +'%-H')"
+            if [ $timeStringHour -eq "0" ]; then
+        timeString="zero"
+            else
+        timeString="$(number_to_text $timeStringHour)"
+            fi
+            if [ $minute -eq "0" ]; then
+        timeString="${timeString} hundred hours"
+            elif [ $minute -lt 10 ]; then
+        timeString="${timeString} O $(number_to_text $minute)"
+            else
+        timeString="${timeString} $(number_to_text $minute)"
+            fi
+    fi
+    #Add temperature if zipcode is set
+    if [ -n "$zipcode" ] ; then
+       if [ "$torify" == "true" ] ; then 
+            temperature="$(torify curl -s "http://mobile.wunderground.com/cgi-bin/findweather/getForecast?brand=mobile&query=${zipcode}" | grep -A 2 '<tr><td>Temperature</td>' | tr -cd '[:digit:]-.' | cut -d . -f1)"
+        else
+            temperature="$(curl -s "http://mobile.wunderground.com/cgi-bin/findweather/getForecast?brand=mobile&query=${zipcode}" | grep -A 2 '<tr><td>Temperature</td>' | tr -cd '[:digit:]-.' | cut -d . -f1)"
+        fi
+        if [ -n "$temperature" ] ; then
+            if [ "$format" = "24" ]; then
+                timeString="$timeString and $(number_to_text $temperature) degrees."
+            else
+                timeString="$timeString $(number_to_text $temperature) degrees."
+            fi
+        fi
+    fi
+    case "$voice" in
+        "cepstral")
+            swift -o $voiceFile "$timeString"
+            #If the default sound command is used write time to file and normalize it before playing, cause Cepstral is kind of low volume.
+            if [ "$soundCommand" == "play -qV0" ] ; then
+                $soundCommand $voiceFile norm
+            else
+                $soundCommand $voiceFile
+            fi
+        ;;
+        "espeak")
+            espeak -v en-us -a 175 "$timeString"
+        ;;
+        "speak")
+            speak-ng "$timeString"
+        ;;
+        "festival")
+            #If the default sound command is used write time to file and normalize it before playing, cause festival is kind of low volume.
+            if [ "$soundCommand" == "play -qV0" ] ; then
+            #    echo "$timeString" | text2wave -o $voiceFile
+                $soundCommand $voiceFile norm
+            else
+                echo "$timeString" | festival --tts
+            fi
+        ;;
+        "flite")
+            #For some reason flite has trouble with ##:## format.
+            echo "$timeString" | flite
+        ;;
+        "googletts")
+            /usr/bin/translate-shell -speak -b "$timeString"
+        ;;
+        "flite_time")
+            flite_time $(date +'%H:%M') &> /dev/null
+        ;;
+        "speech-dispatcher")
+            spd-say -w -P important "$timeString"
+        ;;
+        "pico")
+            pico2wave -w $voiceFile "$timeString"
+            #ogg123 doesn't do wav, so hopefully everyone has aplay...
+            if [[ "$soundCommand" == "ogg123" || "$soundCommand" == "ogg123 -q" ]] ; then
+                aplay -q $voiceFile
+            else
+                $soundCommand $voiceFile
+            fi
+        ;;
+        *)
+            $voice "$timeString"
+    esac
+    rm $voiceFile
+fi
+
+#Play the prepended sound if one is selected
+#There will be a slight gap between the prepended sound and the actual chiming.
+#This is to simulate real clocks based on my experience.
+if [ "$minute" -eq "0" ]; then
+    if [[ -f "$soundPack/prepend.ogg" && "$chime" = "true" ]]; then
+        $soundCommand "$soundPack/prepend.ogg"
+    fi
+fi
+
+#chime for quarter hour
+if [[ "$minute" -eq "15" || "$minute" -eq "30" || "$minute" -eq "45" ]] ; then
+    #Play correct sound pack file
+    if [ -f "$soundPack/$minute.ogg" ] ; then
+        if [ $chime != "false" ] ; then
+            $soundCommand "$soundPack/$minute.ogg"
+        fi
+    fi
+fi
+
+#Chime on the hour
+if [ "$minute" -eq "0" ] ; then
+    #Check if soundpack has hour chimes or uses the bell sound.
+    if ! [ -f "$soundPack/$hour.ogg" ] ; then
+        if [ $chime != "false" ] ; then
+            i=0
+            #create chime string for sound players that can handle more than one sound argument.
+            soundString=""
+            while [ "$i" -lt "$hour" ] ; do
+                if [[ "$soundCommand" == "play" || "$soundCommand" == "play -q" || "$soundCommand" == "ogg123" || "$soundCommand" == "ogg123 -q" ]] ; then
+                soundString="$soundString $soundPack/bell.ogg"
+            else
+                $soundCommand "$soundPack/bell.ogg"
+            fi
+            i=$(($i + 1))
+        done
+        if [ -n "$soundString" ] ; then
+            #No quotes around soundString here because it will not work.
+            $soundCommand $soundString
+        fi
+    fi
+   else
+        if [ $chime != "false" ] ; then
+            $soundCommand "$soundPack/$hour.ogg"
+        fi
+    fi
+fi
+exit 0
+

@@ -1,0 +1,25 @@
+#!/bin/sh
+
+final () {
+    kill "$PID" 
+    sleep 1
+    amixer -q sset 'Master' 80%
+}
+trap final EXIT
+
+URL=$1
+if [ $2 == "" ]; then TIME="INFINITY"; else TIME=$2; fi
+
+
+amixer -q sset 'Master' 80%
+chromium --incofnito $1 & 
+sleep 1; PID=$(pgrep -f -a '/chromium' | grep 'type=renderer' | grep -v extension | awk '{print $15 " " $1}' | grep renderer | sed 's/--renderer-client-id=//' | sort -n | tail -n 1 | awk '{print $2}')
+
+if [ ! $2 == "INFINITY" ] ; then 
+    sleep $2
+    seq 1 10 | while read line ; do
+        amixer -q sset 'Master' 3%- 
+        sleep 1
+    done
+fi
+

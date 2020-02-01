@@ -1,0 +1,5 @@
+#!/bin/sh 
+
+LOOP="$@ | sed -e 's/line/\\\$line/g'"
+echo $LOOP
+while read line ; do $LOOP  ; done 

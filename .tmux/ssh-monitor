@@ -1,0 +1,14 @@
+select-pane -t 0
+split-window -h
+
+#setw main-pane-width 75
+#select-layout main-vertical
+
+display-panes
+
+send-keys -t 0 'cd ~/.ipban' enter 
+send-keys -t 0 'banloop' enter
+send-keys -t 1 'cd ~/.ipban' enter
+send-keys -t 1 'ipupdator' enter
+
+select-pane -t 0

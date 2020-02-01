@@ -1,0 +1,23 @@
+
+select-pane -t 0
+split-window -h
+select-pane -t 1
+split-window -v
+
+setw main-pane-width 75
+select-layout main-vertical
+
+display-panes
+
+resize-pane -R -t 2 10
+resize-pane -U -t 2 12
+
+
+send-keys -t 1 'clock' enter
+send-keys -t 0 'cd $OCAML/pen && ll' enter
+send-keys -t 2 'cd $OCAML/pen ' enter
+send-keys -t 2 'utop' enter
+
+
+
+select-pane -t 0

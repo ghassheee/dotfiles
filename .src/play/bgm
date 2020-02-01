@@ -1,0 +1,36 @@
+#!/bin/sh
+vol(){ amixer -c $LOCAL_SND_CARD -q sset 'Master' $1%; }
+[[ -z $LOCAL_SND_CARD ]] && { echo "warning: setting LOCAL_SND_CARD=0";LOCAL_SND_CARD=1; }
+
+VOLUME=50 
+TIME=1800
+[[ "$1" == "" ]] || DIR=$1
+[[ "$2" == "" ]] || TIME=$2
+[[ "$3" == "" ]] || VOLUME=$3
+[[ "$1" == "" ]] && for i in $(ls $MUSIC | sort -R) ; do DIR=$i; done
+ptree_of() { ps -aef --forest 2>/dev/null | grep "$(ps -o pid= 2>/dev/null )" | grep -v "grep" | grep $1 | awk '{print $2}'; }
+ptree() { ps -aef --forest 2>/dev/null | grep "$(ps -o pid= 2>/dev/null )" | grep -v "grep" | awk '{print $2}'; }
+final () {
+    ptree_of stopwatch  | while read line; do echo "bgm kills $line"; kill $line 2>/dev/null || echo "error: $line not exist"; done &
+    ptree_of playrandom  | while read line; do echo "bgm kills $line"; kill $line 2>/dev/null || echo "error: $line not exist"; done &
+    [[ "$(jobs -p)" == "" ]] || for i in "$(jobs -p)" ; do echo "bgm kills $i"; kill $i 2>/dev/null || echo "error: $i not found"; done & 
+    sleep 0.1;vol 70;sleep 0.3;
+}
+
+set -e
+trap final EXIT
+
+#############
+# $$ parent #
+#############
+echo "bgm           : $$";
+vol 0
+$HOME/.bin/playrandom $MUSIC/$DIR -v 0.$VOLUME 2>/dev/null &
+
+############
+# $! child #
+############
+
+for i in $(seq 20 1 80 ) ; do vol $i; sleep 0.1; done
+sleep $TIME;
+for i in $(seq 80 -1 20) ; do vol $i; sleep 0.1; done

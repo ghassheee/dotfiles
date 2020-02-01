@@ -1,0 +1,17 @@
+:set prompt "λ> "
+:set -XFlexibleInstances
+:set -XMultiParamTypeClasses
+:set -XLambdaCase
+:set -XTemplateHaskell
+:set -XDataKinds
+:set -XAllowAmbiguousTypes   
+:set -XRankNTypes
+:set -XFlexibleContexts
+-- :set -XGADTs
+:set -ddump-deriv
+
+-- hoogle
+:def hoogle \s -> return $ ":! hoogle search -l --count=20 \"" ++ s ++ "\""
+:def doc    \s -> return $ ":! hoogle search -l --info     \"" ++ s ++ "\""
+
+

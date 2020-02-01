@@ -1,0 +1,5 @@
+#!/bin/sh
+
+ps -aef --forest | grep "$(ps -aef --forest 2>/dev/null | grep -v "grep" | grep $1 | awk '{print $2}')" | grep -v grep
+
+

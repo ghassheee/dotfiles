@@ -1,0 +1,30 @@
+
+select-pane -t 0
+split-window -v
+select-pane -t 0
+split-window -h
+select-pane -t 0
+split-window -v
+select-pane -t 0
+split-window -v
+
+#setw main-pane-width 70
+#select-layout main-vertical
+
+display-panes
+
+resize-pane -L -t 0 40
+resize-pane -D -t 1 10
+resize-pane -D -t 4 15
+
+
+send-keys -t 4 'rm -f $HOME/.local/share/io.parity.ethereum/jsonrpc.ipc' enter
+send-keys -t 0 'clock' enter
+send-keys -t 1 'talking-price' enter
+send-keys -t 2 'nico' enter
+send-keys -t 3 '$ETHEREUM/zcash-1.0.9/bin/zcashd' enter
+send-keys -t 4 '' enter
+send-keys -t 4 'parity --warp' enter
+
+
+select-pane -t 3

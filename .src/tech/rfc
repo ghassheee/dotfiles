@@ -1,0 +1,10 @@
+#!/bin/sh
+if [[ $2 == "" ]]
+then 
+    curl https://tools.ietf.org/rfc/rfc${1}.txt | less
+else
+    for i in $@
+    do
+        curl https://tools.ietf.org/rfc/rfc$i.txt
+    done
+fi

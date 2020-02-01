@@ -1,0 +1,4 @@
+#!/bin/sh
+
+URL=http://www.earthcam.com/world/ireland/dublin/?cam=templebar
+$HOME/.bin/opentab-chromium $URL 3600

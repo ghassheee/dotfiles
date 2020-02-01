@@ -1,0 +1,11 @@
+StarDict's dict ifo file
+version=2.4.2
+wordcount=171879
+idxfilesize=3732514
+bookname=jmdict-ja-en
+author=Jim Breen
+email=j.breen@csse.monash.edu.au
+website=http://www.csse.monash.edu.au/~jwb/j_jmdict.html
+description=Convert to stardict by Alastair Tse <liquidx@gentoo.org>, http://www-lce.eng.cam.ac.uk/~acnt2/code/
+date=2003.07.01
+sametypesequence=m

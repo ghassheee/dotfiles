@@ -1,0 +1,6 @@
+#!/bin/sh
+
+URL="http://so-zou.jp/web-app/news/nettv-news/?ch=Euronews"
+TIME=600
+
+exec $HOME/.bin/opentab-firefox $URL $TIME

@@ -1,0 +1,20 @@
+select-pane -t 0
+split-window -h
+select-pane -t 1
+split-window -v
+
+setw main-pane-width 75
+select-layout main-vertical
+
+display-panes
+
+resize-pane -R -t 2 26
+resize-pane -U -t 2 12
+
+send-keys -t 1 'clock' enter
+send-keys -t 0 'cd $RUST/projects && ll' enter
+send-keys -t 2 'cd $RUST/projects && tree -L 2' enter
+##send-keys -t 2 'cd ~/.multirust/toolchains/nightly/cargo/registry/src/git*' enter
+send-keys -t 2 'l' enter
+
+select-pane -t 0

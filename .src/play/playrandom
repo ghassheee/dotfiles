@@ -1,0 +1,36 @@
+#!/bin/sh
+
+VOLUME="0.5"
+
+final () {
+    [[ "$(jobs -p)" == "" ]] || for i in "$(jobs -p)" ; do 
+        echo "playrandom kills $i"; 
+        kill $i 2>/dev/null || echo "error $i does not exist." ; 
+    done && echo "playrandom is done."
+}
+set -e
+trap final EXIT 
+
+## PID
+echo "playrandom    : $$"
+
+## set Args
+if   [[ $1 = "" ]] ; then 
+    DIR=""
+elif [[ $1 = "-v" ]] ; then
+    VOLUME=$2
+else
+    DIR="$1/"
+    [[ $2 = "-v" ]] && VOLUME=$3
+fi
+
+## MAIN
+for line in $(ls $DIR | sort -R) ; do
+# ls $DIR | sort -R | while read line ; do
+    echo "Volume        : $VOLUME "
+    echo "Playing       : $line" 
+    $HOME/.bin/volume-play "${DIR}${line}" $VOLUME 2>/dev/null;
+    echo "";
+done
+
+

@@ -1,0 +1,61 @@
+#!/bin/bash
+
+final () {
+    kill $PID_STOPWATCH
+}
+
+trap final EXIT
+
+string=""
+
+stopwatch & 
+PID_STOPWATCH=$!
+if [[ "$2" =~  m[inutes]* ]]
+then
+    string+="$1 minute"
+    echo $string 
+    sleep $(expr $1 \* 60 )
+fi
+
+if [ "$2" = "s" ]
+then
+    sleep $1
+    string+="$1 second"
+fi
+
+if [ "$4" = "s" ]
+then 
+    sleep $3
+    string+=" and $3 seconds"
+fi
+
+string+=" have passed          "
+
+echo $string
+kill $PID_STOPWATCH
+
+#while $(true)
+#do
+
+speak () {
+espeak " je kann dase yo"
+sleep 1 
+espeak " je kann dase yo"
+sleep 1 
+espeak " je kann dase yo"
+sleep 1 
+espeak " je kann dase yo"
+sleep 1 
+}
+
+#speak & 
+
+~/.bin/volume-play  $MOUNT/music/broadcast/ghibli.opus 
+#espeak "$string"
+#espeak "ring ring ring "
+#sleep 2 
+#done 
+
+
+
+

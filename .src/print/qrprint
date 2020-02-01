@@ -1,0 +1,13 @@
+#!/bin/zsh 
+
+if [[ $# == '0' ]] 
+then 
+    tee |  qrencode -o /tmp/qrencode.png -t PNG 
+else
+    echo $@ | qrencode -o /tmp/qrencode.png -t PNG 
+fi 
+
+lpr -P HL3170CDW -o media="letter" -o number-up=16 /tmp/qrencode.png
+
+## test
+#thunar /tmp/qrencode.png

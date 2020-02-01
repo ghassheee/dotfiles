@@ -1,0 +1,33 @@
+#!/bin/sh
+
+URL=$1
+TIME=$2
+
+final () {
+    if [ $(pgrep -f -a '/firefox' | wc -l) == "3" ] ; then 
+        pgrep -f -a '/firefox' | awk '{print $5 " " $1}' | sort -nr | awk '{print $2}' | while read line ; do kill $line ; done
+        killall firefox 
+    else
+        echo $PIDS | while read line ; do kill $line ; done
+    fi
+    sleep 1
+    amixer -q sset 'Master' 80%
+}
+trap final EXIT
+
+amixer -q sset 'Master' 80%
+firefox --private-window $URL &
+sleep 1; 
+PIDS=$(pgrep -f -a firefox | grep child | awk '{print $5 " " $1}' | sort -n | tail -n 2 | awk '{print $2}')
+if [ ! $TIME == "" ] ; then 
+    sleep $TIME
+fi
+
+seq 1 15 | while read line ; do
+    amixer -q sset 'Master' 3%- ;
+    sleep 1
+done
+
+
+
+

@@ -1,0 +1,26 @@
+#!/bin/sh
+# this program is volumed ffplay
+# takes 2 args;
+# - filename
+# - volume 0.07-10.0
+
+VOLUME=$2
+#FFPLAY="/bin/ffplay -nodisp -autoexit -loglevel warning"
+
+final () { 
+    echo ""
+    $HOME/.bin/ptree stopwatch | while read line; do echo "volume-play kills $line"; kill $line 2>/dev/null || echo "error: $line not exist"; done &
+    [[ "$(jobs -p)" == "" ]] || for i in "$(jobs -p)" ; do 
+            echo "volume-play kills $i";
+            kill $i || echo "error: $i does not exist" ;
+        done && echo "volume-play is done."; }
+set -e
+trap final EXIT
+
+
+## STOPWATCH 
+$HOME/.bin/stopwatch 2>/dev/null & 
+
+# MAIN
+echo "volume-play   : $$"
+/bin/ffplay -nodisp -autoexit -loglevel warning -af volume=$VOLUME $1

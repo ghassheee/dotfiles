@@ -1,0 +1,115 @@
+#!/bin/sh
+
+if [[ $1 == "" || $1 == "-h" || $1 == "--help" ]] ; then 
+echo "
+            ********************
+            ********************
+            ****            **** 
+            ****    PLOT    **** 
+            ****            **** 
+            ********************
+            ********************
+
+DESCRIPTION: 
+
+    plotting zeros of algebraic varieties, 
+    using sagemath as one of dependencies
+
+
+USAGE: 
+
+    $ plot [OPTION] range function1 function2 function3 
+
+
+EXAMPLES:
+
+    $ plot 10 \"y^2-x^3-x-z\"
+    $ plot sphere 1    \"y^2*z-x^3-x*z^2\"
+    $ plot blowup 1.5  \"y^2-x^2*(x+1)\"
+    $ plot quad   1    \"x^2+y^2+z^2-1.5*(x*y+y*z+z*x)\"
+    $ plot quad   1    \"x^3+y^3+y^3\"
+    $ plot hopfpb 3    \"x\" \"y\" \"z\" 
+
+
+OPTION: 
+    - sphere : show function f with a 2-sphere x^2+y^2+z^2=1  
+    - blowup : blowup function f by xz=yw (@w=1 plane)
+    - quad   : show function f with quadratic transformation of f 
+    - hopfpb : show pullback of f by hopf-fibration S^3 -> S^2, 
+                at E^3 which is stereographic projection of S^3
+    - hess   : show function f with hessian of f and total_deriv_f 
+                i.e. df/dx+df/dy+df/dz. At the intersection points 
+                of f(yellow) and hess_f(red), the curvature is 0."
+exit;
+fi
+
+F1="f1"; F2="f2"; F3="f3"
+VARS="x,y,z"; ARGS1=$VARS; ARGS2=$VARS; ARGS3=$VARS
+APP_RANGE="r(x),r(y),r(z)"
+SPHERE="x^2+y^2+z^2-1"
+BLOWUP="y-x*z"
+PREFIX="x,y,z = var('x,y,z')"; INFIX=""
+HOPF_PREFIX="
+    X,Y,Z = var('X,Y,Z'); 
+    w = 1-(X^2+Y^2+Z^2)
+    x = 2*(4*X*Z+2*w*Y)/(2-w) 
+    y = 2*(4*Y*X-2*w*Z)/(2-w)
+    z = (w^2+4*X*X-4*Y*Y-4*Z*Z)/(2-w)";
+HESS_INFIX="
+    def df(a)   : return derivative(f1(x,y,z),a)
+    def ddf(a,b): return derivative(derivative(f1(x,y,z),a),b)"
+DERIV_F="df(x)+df(y)+df(z)"
+HESS_F="ddf(x,x)*ddf(y,y)*ddf(z,z) + ddf(x,y)*ddf(y,z)*ddf(z,x) + ddf(x,z)*ddf(z,y)*ddf(y,x) - ddf(x,x)*ddf(y,z)*ddf(z,y) - ddf(x,y)*ddf(y,x)*ddf(z,z) - ddf(x,z)*ddf(y,y)*ddf(z,x)";
+
+if [[ $1 == "threejs" ]] ; then 
+    VIEWER="viewer='$1'"; shift; 
+else
+    VIEWER=''
+fi
+
+if [[ $1 == "sphere" ]] ; then 
+    shift; RANGE=$1; shift; 
+    POLY0=$SPHERE; POLY1=$1;shift; POLY2=$1;shift; POLY3=$1;
+elif [[ $1 == "blowup" ]] ; then  
+    shift; RANGE=$1; shift; 
+    POLY0=$BLOWUP; POLY1=$1;shift; POLY2=$1;shift; POLY3=$1;
+elif [[ $1 == "quad" ]] ; then 
+    shift; RANGE=$1; shift; 
+    POLY0=$SPHERE; POLY1=$1;POLY2=$1;shift; POLY3=$1;
+    ARGS2="y*z,z*x,x*y";
+elif [[ $1 == "hopfpb" ]] ; then  
+    shift; RANGE=$1; shift; 
+    POLY0="0"; POLY1=$1;shift; POLY2=$1;shift; POLY3=$1;
+    PREFIX=$HOPF_PREFIX
+    APP_RANGE="r(X),r(Y),r(Z)" 
+elif [[ $1 == "hess" ]] ; then 
+    shift; RANGE=$1; shift;
+    POLY0=$SPHERE; POLY1=$1; POLY2=$HESS_F; POLY3=$DERIV_F 
+    INFIX=$HESS_INFIX
+else 
+    RANGE=$1; shift;
+    POLY0="0"; POLY1=$1;shift; POLY2=$1;shift;POLY3=$1;
+fi
+
+DEF_RANGE="def r(x) : return (x,-$RANGE,$RANGE)"
+DEF_FUN1="def $F1($VARS): return $POLY1"
+DEF_FUN2="def $F2($VARS): return $POLY2"
+DEF_FUN3="def $F3($VARS): return $POLY3"
+APP_FUN1="$F1($ARGS1)"
+APP_FUN2="$F2($ARGS2)"
+APP_FUN3="$F3($ARGS3)"
+
+echo "
+    $PREFIX
+    $DEF_RANGE
+    $DEF_FUN1
+    $INFIX
+    $DEF_FUN2
+    $DEF_FUN3
+    p =  implicit_plot3d($POLY0    ,$APP_RANGE, frame=False,color='skyblue')
+    p += implicit_plot3d($APP_FUN1 ,$APP_RANGE, frame=False,color='yellow')
+    p += implicit_plot3d($APP_FUN2 ,$APP_RANGE, frame=False,color='red')
+    p += implicit_plot3d($APP_FUN3 ,$APP_RANGE, frame=False,color='white')
+    show(p,$VIEWER)
+    sleep(2)
+" | sage;

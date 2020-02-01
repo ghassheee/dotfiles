@@ -1,0 +1,15 @@
+#!/bin/sh
+
+
+if [[ $1 = "-v" ]]
+    then
+        VOLUME=$2;
+    else
+        echo "";
+fi
+        
+
+for i in $(cat PLAYLIST); 
+do
+    ffplay -fs -af volume=$VOLUME -autoexit $i; 
+done

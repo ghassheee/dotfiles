@@ -1,0 +1,19 @@
+(* Added by OPAM. *)
+let () =
+  try Topdirs.dir_directory (Sys.getenv "OCAML_TOPLEVEL_PATH")
+  with Not_found -> ()
+;;
+
+(* This file is preprocessed by 'ocaml', 'utop' interpreter *)
+(* 
+ * $ ocamlc -where              ## shows the system library path
+ * $ ocamlfind list             ## showw third party library path 
+ * $ ocamlfind query labltk     ## shows the path of llabltk module
+ *)
+
+#use "topfind";;
+#thread;;
+(* #camlp4o;; *)
+(* #require "labltk";;  
+#use "base.ml"
+*)

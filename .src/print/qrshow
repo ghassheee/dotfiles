@@ -1,0 +1,10 @@
+#!/bin/zsh 
+
+if [[ $# == '0' ]] 
+then 
+    tee |  qrencode -o /tmp/qrencode.png -t PNG 
+else
+    echo $@ | qrencode -o /tmp/qrencode.png -t PNG 
+fi 
+
+firefox /tmp/qrencode.png

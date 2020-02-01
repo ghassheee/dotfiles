@@ -1,0 +1,13 @@
+#!/bin/sh
+
+expect -c "
+spawn /bin/ruby $DOT/.bin/nicoalert.rb 
+expect \":\"
+send \"${NICOMAIL}\n\"
+expect \":\"
+send \"${NICOPASS}\n\"
+interact
+"
+
+
+

@@ -1,0 +1,12 @@
+#!/bin/sh
+
+for i in $(ls $1); 
+do 
+STRLEN=$(echo $i | wc -m) 
+echo;
+for x in $(seq 1 $STRLEN) ; do printf "#"; done; printf "#################\n"
+echo "####     $i     ####"
+for x in $(seq 1 $STRLEN) ; do printf "#"; done; printf "#################\n"
+echo;
+cat $i; 
+done | less

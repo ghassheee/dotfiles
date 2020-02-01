@@ -1,0 +1,207 @@
+#!/usr/bin/zsh
+
+
+. $DOT/.bin/price
+
+while true 
+do 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        sleep 100
+        price
+        cowsay_price 
+        talking_price
+done
+
+
+
+
+
+
+
+
+

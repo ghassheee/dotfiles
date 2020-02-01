@@ -1,0 +1,8 @@
+#!/bin/zsh
+#
+## This command tells you your Printers' Name
+#  lpstat -p -d   
+
+
+#lpr -P DCPJ973N -o fit-to-page  $@
+echo "" | lpr -P HL3170CDW -o media="a4" 

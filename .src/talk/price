@@ -1,0 +1,68 @@
+#!/bin/zsh
+
+if [[ $1 == "" ]]
+then
+    CURRENCY1="BTC"
+    CURRENCY2="ETH"
+else
+    CURRENCY1=$1
+    CURRENCY2=$2
+fi
+BASE="usd"
+
+price(){
+    curl https://api.coinmarketcap.com/v1/ticker/ 2> /dev/null 1> /tmp/price_table 
+}
+
+choose(){
+    grep \"$1\" -B 2 -A 13 | grep price_$BASE | sed 's;"price_...":;;' | sed 's;[\",];;g' 
+}
+
+per_usd(){
+    PAIR="$1/USD"
+    VALUE=$(cat /tmp/price_table | choose $1)
+    echo "$PAIR \t is $VALUE"
+}
+
+per_eth(){
+    PAIR="$1/ETH"
+    ETC_USD=$(cat /tmp/price_table | choose $1);
+    ETH_USD=$(cat /tmp/price_table | choose ETH);
+    VALUE=$(echo "( $ETC_USD * 1000000000 ) / ( $ETH_USD * 10000 )" | bc) 
+    echo "$PAIR \t is 0.0$VALUE"
+}
+per_btc(){
+    PAIR="$1/BTC";
+    VALUE=$(BASE="btc" && cat /tmp/price_table | choose $1);
+    echo "$PAIR \t is $VALUE"
+}
+
+
+cowsay_price(){
+echo "
+$(date)\n 
+$(per_usd $CURRENCY1)
+$(per_usd $CURRENCY2)
+$(per_usd BCH)
+$(per_btc $CURRENCY2)
+$(per_eth ETC)
+$(per_usd ZEC)
+$(per_usd OMG)
+$(per_usd DASH)
+$(per_btc DASH)
+$(per_eth DASH)
+" | cowsay -W 22
+}
+
+talking_price(){
+$DOT/.bin/night 2> /dev/null || echo "
+$(per_usd $CURRENCY1) \n 
+$(per_usd $CURRENCY2)
+" | festival --tts
+}
+
+
+price 
+cowsay_price
+talking_price
+

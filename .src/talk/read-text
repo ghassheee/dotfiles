@@ -1,0 +1,3 @@
+#!/bin/sh
+
+tee | nkf -e | kakasi -JH | kakasi -HK | kakasi -Ka | nkf -w | sed -e 's/http.*$//' | sed -e 's/\%//' | sed -e 's//\./g' | espeak 
