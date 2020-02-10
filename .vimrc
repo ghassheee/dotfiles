@@ -50,3 +50,20 @@ function! VSS()
     setl scrollbind         " set local scrollbind in left window
     let &so=@z
 endfunction
+
+set runtimepath+=~/.vim/deoplete.nvim
+set runtimepath+=~/.vim/nvim-yarp
+set runtimepath+=~/.vim/vim-hug-neovim-rpc
+set runtimepath+=~/.vim/deoplete-ocaml
+let g:deoplete#enable_at_startup = 1 
+
+
+syntax enable 
+filetype plugin indent on 
+
+let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+execute 'set rtp+=' . g:opamshare . '/merlin/vim'
+
+
+let g:deoplete#complete_method = "complete" 
+let g:deoplete#auto_complete_delay = 0
