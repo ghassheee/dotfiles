@@ -3,6 +3,9 @@
 URL=$1
 TIME=$2
 
+EXISTING_TABS=$(pgrep -f -a '/firefox' | wc -l)
+
+
 final () {
     if [ $(pgrep -f -a '/firefox' | wc -l) == "3" ] ; then 
         pgrep -f -a '/firefox' | awk '{print $5 " " $1}' | sort -nr | awk '{print $2}' | while read line ; do kill $line ; done

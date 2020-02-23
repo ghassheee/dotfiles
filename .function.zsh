@@ -230,3 +230,21 @@ function xcol()
   }
 }
 
+
+video(){
+    [[ $3 == "" ]] && { 
+    echo "Usage:"
+    echo " $ video time name howManyTimes " 
+    echo " $ video 3600 'Lunch' 10"
+} || {
+    INPUT_MIC='alsa_input.usb-046d_0825_855D4C10-02.analog-mono'
+    INPUT_AUDIO='alsa_input.pci-0000_38_00.6.analog-stereo'
+    CAMERA='/dev/video0'
+    FRAMERATE=25
+    VIDEOSIZE=800x600
+    for i in $(seq -w 1 $3); 
+    do  
+        ffmpeg -f pulse -i $INPUT_MIC -t $1 -f v4l2 -framerate $FRAMERATE -video_size $VIDEOSIZE -i $CAMERA -t $1 "$(date +%Y%m%d)-$2-$i".mkv ; 
+    done
+}
+} 
