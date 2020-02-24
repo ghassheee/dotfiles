@@ -19,7 +19,7 @@ alias timi='timidity -iA Os'
 # COPY PASTE
 alias pbpaste='xsel -bo'
 alias pbcopy='xsel -bi'
-alias rename='perl-rename'
+# alias rename='perl-rename'
 
 # XCALIB 
 alias redshift='    xcalib -a -blue 2 0 60 -green 1 0 80'
