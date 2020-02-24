@@ -353,6 +353,7 @@ if [ "$speakTime" == "true" ] ; then
     rm $voiceFile
 fi
 
+
 #Play the prepended sound if one is selected
 #There will be a slight gap between the prepended sound and the actual chiming.
 #This is to simulate real clocks based on my experience.
