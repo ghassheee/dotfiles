@@ -49,10 +49,6 @@ fi
 }
 
 uninstall(){
-if ! [ -d "$HOME/.oh-my-zsh" ] ; then
-	sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-	mv $HOME/.zshrc $HOME/.zshrc.old
-fi
 
 unlink $HOME/.color.zsh
 unlink $HOME/.vimrc
@@ -64,7 +60,9 @@ unlink $HOME/.path.zsh
 unlink $HOME/.alias.zsh
 unlink $HOME/.macos.zsh
 unlink $HOME/.linux.zsh
-unlink $HOME/.lanugage.zsh
+unlink $HOME/.language.zsh
+unlink $HOME/.function.zsh 
+unlink $HOME/.ipban.zsh
 unlink $HOME/.src 
 unlink $HOME/.bin
 
