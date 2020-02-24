@@ -24,7 +24,7 @@ deploy(){
 
 install(){
 ## [ -d ~/.vim ] || git clone https://www.github.com/ghassheee/vimrc ~/.vim
-[[ -d ~/Dropbox      ]] && ln -s ~/Dropbox ~/Desktop/
+[[ -d ~/Dropbox      ]] && [[ -d ~/Desktop/Dropbox ]] || ln -s ~/Dropbox ~/Desktop/
 [[ -f ~/.private.zsh ]] || echo 'MOUNT="" ## configure!' > ~/.private.zsh 
 
 [[ `uname` == 'Linux'  ]] && OPTION="sfn"
