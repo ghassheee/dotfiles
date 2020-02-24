@@ -2,6 +2,7 @@
 
 final () {
     kill "$PID" 
+    killall chromium
     sleep 1
     amixer -q sset 'Master' 80%
 }

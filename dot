@@ -30,34 +30,21 @@ install(){
 [[ `uname` == 'Linux'  ]] && OPTION="sfn"
 [[ `uname` == 'Darwin' ]] && OPTION="sfh"
 
-ln -$OPTION $DOT/.oh-my-zsh         $HOME/.oh-my-zsh
-ln -$OPTION $DOT/.color.zsh         $HOME/.color.zsh
-ln -$OPTION $DOT/.function.zsh      $HOME/.function.zsh
 ln -$OPTION $DOT/.vimrc             $HOME/.vimrc
 ln -$OPTION $DOT/.vim               $HOME/.vim  
 ln -$OPTION $DOT/.zshrc             $HOME/.zshrc
 ln -$OPTION $DOT/.env.zsh           $HOME/.env.zsh
-ln -$OPTION $DOT/.path.zsh          $HOME/.path.zsh
-ln -$OPTION $DOT/.alias.zsh         $HOME/.alias.zsh
-ln -$OPTION $DOT/.macos.zsh         $HOME/.macos.zsh
-ln -$OPTION $DOT/.linux.zsh         $HOME/.linux.zsh
-ln -$OPTION $DOT/.ipban.zsh         $HOME/.ipban.zsh
-ln -$OPTION $DOT/.language.zsh      $HOME/.language.zsh 
 ln -$OPTION $DOT/.ocamlinit         $HOME/.ocamlinit    
 ln -$OPTION $DOT/.ghci              $HOME/.ghci
 ln -$OPTION $DOT/.stardict          $HOME/.stardict
 ln -$OPTION $DOT/.bin               $HOME/.bin 
-ln -$OPTION $DOT/.src               $HOME/.src
-ln -$OPTION $DOT/.dot               $HOME/.bin/dot
+ln -$OPTION $DOT/dot                $HOME/.bin/dot
 ln -$OPTION $DOT/.tmux              $HOME/.tmux
 ln -$OPTION $DOT/.tmux.conf         $HOME/.tmux.conf
-ln -$OPTION $DOT/.tmux.linux.conf   $HOME/.tmux.linux.conf
-ln -$OPTION $DOT/.tmux.macos.conf   $HOME/.tmux.macos.conf
 
 if [[ `uname` == "Linux" ]] ; then
 ln -$OPTION $DOT/.Xmodmap           $HOME/.Xmodmap
 ln -$OPTION $DOT/.xinitrc           $HOME/.xprofile
-ln -$OPTION $DOT/.festivalrc        $HOME/.festivalrc
 fi
 }
 

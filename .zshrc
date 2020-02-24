@@ -1,12 +1,19 @@
+################
+###   ENV    ###
+################
+
+
+source $HOME/.private.zsh
+source $HOME/.env.zsh
+
 #################
 ### OH-MY-ZSH ###
 #################
 
-
 set +u
-if [ -d $HOME/.oh-my-zsh ]
+if [ -d $DOT/.oh-my-zsh ]
 then
-    ZSH=$HOME/.oh-my-zsh
+    ZSH=$DOT/.oh-my-zsh
     ZSH_THEME="robbyrussell"
     DISABLE_AUTO_UPDATE="true"
     UPDATE_ZSH_DAYS=180
@@ -33,21 +40,20 @@ fi
 ###  GENERAL  ###
 #################
 
-source $HOME/.private.zsh
-source $HOME/.color.zsh
-source $HOME/.env.zsh
-source $HOME/.path.zsh
-source $HOME/.alias.zsh
-source $HOME/.language.zsh
-source $HOME/.function.zsh
-source $HOME/.ipban.zsh
+source $DOT/.color.zsh
+source $DOT/.path.zsh
+source $DOT/.alias.zsh
+source $DOT/.language.zsh
+source $DOT/.function.zsh
+source $DOT/.ipban.zsh
+
 
 #################
 ###    O S    ###
 #################
 
 set +u
-[[ `uname` == 'Linux'  ]] && source $HOME/.linux.zsh;
-[[ `uname` == 'Darwin' ]] && source $HOME/.macos.zsh;
+[[ `uname` == 'Linux'  ]] && source $DOT/.linux.zsh;
+[[ `uname` == 'Darwin' ]] && source $DOT/.macos.zsh;
 
 __ETC_ZSHRC_SOURCED=1
