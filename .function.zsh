@@ -67,10 +67,7 @@ cd_func ()
         [[ -z $index ]] && index=1
         adir=$(dirs +$index)
         if [[ -z "$adir" ]]; then
-            if [[ "$SHELL" == "/bin/zsh" || "$SHELL" == "/usr/bin/zsh" || "$SHELL" == "$(type zsh | awk '{print $3}')" ]]; 
-                then cd ~${index}  ;return 0
-                else echo "ADIR is null. Terminating." && return 1
-            fi
+            cd ~${index}  ;return 0
         fi
         the_new_dir=$adir
     fi
@@ -100,6 +97,7 @@ cd_func ()
     set -u
     return 0
 }
+
 alias cd=cd_func
 
 ########################
