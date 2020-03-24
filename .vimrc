@@ -6,14 +6,16 @@ set runtimepath+=~/vim/vim-syntax-christmas-tree
     source ~/.vim/vimrcs/extended.vim
     source ~/.vim/vimrcs/basic.vim
 
-"" set t_Co='256'
-set clipboard=unnamedplus
-colorscheme peaksea
-"colorscheme elflord
+"set t_Co='256'
+"colorscheme peaksea
+colorscheme elflord
 
 nnoremap <silent><C-n> :NERDTreeToggle<CR>
 set shell=zsh
 let NERDTreeShowHidden=1
+
+
+set clipboard=unnamedplus
 
 map <leader>c :w !xsel -i -b<CR>
 map <leader>v :r!xsel -b<CR>

@@ -19,7 +19,7 @@ send-keys -t 0 'sleep 0.1' enter
 send-keys -t 0 'cd ~/ghasshee/ghassheee.github.io' enter
 send-keys -t 0 'clear' enter
 send-keys -t 0 'atom .' enter 
-send-keys -t 2 'cd ~/ghasshee/ghassheee.github.io && jekyll servei --incremental ' enter
+send-keys -t 2 'cd ~/ghasshee/ghassheee.github.io && jekyll serve --incremental ' enter
 # send-keys -t 2 'cd ~/ghasshee/ghassheee.github.io && jekyll serve -H $LOCAL_IP' enter
 send-keys -t 3 'cd ~/ghasshee/ghassheee.github.io/ && ls' enter
 send-keys -t 3 'while true; do echo "           B L O G " | figlet | lolcat -a; sleep 5; done ' enter 
