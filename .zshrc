@@ -4,13 +4,13 @@
 
 
 source $HOME/.private.zsh
-source $HOME/.env.zsh
+source $HOME/ghasshee/dotfiles/.env.zsh
+
 
 #################
 ### OH-MY-ZSH ###
 #################
 
-set +u
 if [ -d $DOT/.oh-my-zsh ]
 then
     ZSH=$DOT/.oh-my-zsh
@@ -35,7 +35,6 @@ then
     source $ZSH/oh-my-zsh.sh
 fi
 
-
 #################
 ###  GENERAL  ###
 #################
@@ -56,4 +55,6 @@ set +u
 [[ `uname` == 'Linux'  ]] && source $DOT/.linux.zsh;
 [[ `uname` == 'Darwin' ]] && source $DOT/.macos.zsh;
 
-__ETC_ZSHRC_SOURCED=1
+echo hoge
+# __ETC_ZSHRC_SOURCED=1
+
