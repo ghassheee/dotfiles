@@ -55,6 +55,5 @@ set +u
 [[ `uname` == 'Linux'  ]] && source $DOT/.linux.zsh;
 [[ `uname` == 'Darwin' ]] && source $DOT/.macos.zsh;
 
-echo hoge
 # __ETC_ZSHRC_SOURCED=1
 
