@@ -65,7 +65,7 @@ filetype plugin indent on
 
 let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 execute 'set rtp+=' . g:opamshare . '/merlin/vim'
-
+execute 'set rtp^=' . g:opamshare . '/ocp-indent/vim'
 
 let g:deoplete#complete_method = "complete" 
 let g:deoplete#auto_complete_delay = 0
