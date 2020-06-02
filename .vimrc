@@ -8,7 +8,16 @@ set runtimepath+=~/vim/vim-syntax-christmas-tree
 
 "set t_Co='256'
 "colorscheme peaksea
-colorscheme elflord
+"colorscheme elflord
+"set background=dark
+"colorscheme peaksea
+"colorscheme mayansmoke
+""colorscheme ir_black
+"colorscheme morning
+colorscheme ron
+"colorscheme pyte
+"colorscheme zellner
+"colorscheme delek
 
 nnoremap <silent><C-n> :NERDTreeToggle<CR>
 set shell=zsh
@@ -69,3 +78,15 @@ execute 'set rtp^=' . g:opamshare . '/ocp-indent/vim'
 
 let g:deoplete#complete_method = "complete" 
 let g:deoplete#auto_complete_delay = 0
+
+" auto-completion shortcut:  Ctrl-f 
+imap <C-f> <C-x><C-o>
+
+
+" Logical Character
+imap <leader>top <C-v>u22A4
+imap <leader>bot <C-v>u22A5
+imap <leader>and <C-v>u2227
+imap <leader>or  <C-v>u2228
+imap <leader>to  <C-v>u2192
+imap <leader>models <C-v>u22A2
