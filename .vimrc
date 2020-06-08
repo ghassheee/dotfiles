@@ -20,8 +20,8 @@ endif
 
 try
 "colorscheme desert
-"colorscheme peaksea
 "colorscheme elflord
+colorscheme pablo
 "colorscheme peaksea
 "colorscheme mayansmoke
 "colorscheme ir_black
@@ -29,7 +29,7 @@ try
 "colorscheme ron
 "colorscheme pyte
 "colorscheme zellner
-colorscheme delek
+"colorscheme delek
 catch
 endtry
 
