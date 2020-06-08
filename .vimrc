@@ -1,4 +1,3 @@
-
 """""""""""""""""""""""""""""""""""""
 "          Src Files                "
 """""""""""""""""""""""""""""""""""""
@@ -29,8 +28,8 @@ try
 "colorscheme morning
 "colorscheme ron
 "colorscheme pyte
-colorscheme zellner
-"colorscheme delek
+"colorscheme zellner
+colorscheme delek
 catch
 endtry
 
@@ -111,17 +110,7 @@ execute 'set rtp^=' . g:opamshare . '/ocp-indent/vim'
 imap <C-f> <C-x><C-o>
 
 """""""""""""""""""""""""""""""""""""
-"       DEOPLETE                    "
-"""""""""""""""""""""""""""""""""""""
-"let g:deoplete#complete_method = "complete" 
-"let g:deoplete#auto_complete_delay = 0
-"let g:deoplete#enable_at_startup = 1 
-
-
-
-" Logical Character
-"""""""""""""""""""""""""""""""""""""
-"                                   "
+"       MATH SYMBOLS                "
 """""""""""""""""""""""""""""""""""""
 imap <leader>top    <C-v>u22A4
 imap <leader>bot    <C-v>u22A5
