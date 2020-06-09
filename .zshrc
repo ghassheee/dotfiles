@@ -5,7 +5,7 @@
 
 source $HOME/.private.zsh
 source $HOME/ghasshee/dotfiles/.env.zsh
-
+source $DOT/.path.zsh
 
 #################
 ### OH-MY-ZSH ###
@@ -40,7 +40,6 @@ fi
 #################
 
 source $DOT/.color.zsh
-source $DOT/.path.zsh
 source $DOT/.alias.zsh
 source $DOT/.language.zsh
 source $DOT/.function.zsh
