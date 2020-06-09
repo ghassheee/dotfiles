@@ -1,3 +1,6 @@
+"""""""""""""""""""""""""""""""""""""
+"          Src Files                "
+"""""""""""""""""""""""""""""""""""""
 set runtimepath+=~/.vim
 set runtimepath+=~/vim/vim-syntax-christmas-tree
 
@@ -6,20 +9,67 @@ set runtimepath+=~/vim/vim-syntax-christmas-tree
     source ~/.vim/vimrcs/extended.vim
     source ~/.vim/vimrcs/basic.vim
 
-"set t_Co='256'
+"""""""""""""""""""""""""""""""""""""
+"            COLOR                  "
+"""""""""""""""""""""""""""""""""""""
+syntax enable
+
+if $COLORTERM == 'gnome-terminal'  
+    set t_Co=256
+endif
+
+try
+"colorscheme desert
+"colorscheme elflord
+colorscheme pablo
 "colorscheme peaksea
-colorscheme elflord
+"colorscheme mayansmoke
+"colorscheme ir_black
+"colorscheme morning
+"colorscheme ron
+"colorscheme pyte
+"colorscheme zellner
+"colorscheme delek
+catch
+endtry
 
+set background=dark
+
+if has("gui_running")       " gvim 
+    set guioptions-=T
+    set guioptions-=e
+    set t_Co=256
+    set guitablabel=%M\ %t
+endif
+
+"""""""""""""""""""""""""""""""""""""
+"             FONT                  "
+"""""""""""""""""""""""""""""""""""""
+set encoding=utf8
+set ffs=unix,dos,mac  " file type standard
+
+
+"""""""""""""""""""""""""""""""""""""
+"           NERDTREE                "
+"""""""""""""""""""""""""""""""""""""
 nnoremap <silent><C-n> :NERDTreeToggle<CR>
-set shell=zsh
 let NERDTreeShowHidden=1
+let NERDTreeIgnore = ['\.cmo$','\.cmi$']
 
-
-set clipboard=unnamedplus
-
+"""""""""""""""""""""""""""""""""""""
+"           CLIPBOARD               "
+"""""""""""""""""""""""""""""""""""""
+if system('uname -s') == "Darwin\n"
+  set clipboard=unnamed "OSX
+else
+  set clipboard=unnamedplus "Linux
+endif
 map <leader>c :w !xsel -i -b<CR>
 map <leader>v :r!xsel -b<CR>
 
+"""""""""""""""""""""""""""""""""""""
+"        VERTIVAL SPLIT             "
+"""""""""""""""""""""""""""""""""""""
 nnoremap <silent><leader>vs :exe VS()<CR>
 nnoremap <silent><leader>vss :exe VSS()<CR>
 
@@ -53,26 +103,35 @@ function! VSS()
     let &so=@z
 endfunction
 
-set runtimepath+=~/.vim/deoplete.nvim
-set runtimepath+=~/.vim/nvim-yarp
-set runtimepath+=~/.vim/vim-hug-neovim-rpc
-set runtimepath+=~/.vim/deoplete-ocaml
-let g:deoplete#enable_at_startup = 1 
 
-
-syntax enable 
-filetype plugin indent on 
-
+"""""""""""""""""""""""""""""""""""""
+"            MERLIN                 "
+"""""""""""""""""""""""""""""""""""""
 let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 execute 'set rtp+=' . g:opamshare . '/merlin/vim'
 execute 'set rtp^=' . g:opamshare . '/ocp-indent/vim'
+" auto-completion shortcut:  Ctrl-f 
+imap <C-f> <C-x><C-o>
 
-let g:deoplete#complete_method = "complete" 
-let g:deoplete#auto_complete_delay = 0
+"""""""""""""""""""""""""""""""""""""
+"       MATH SYMBOLS                "
+"""""""""""""""""""""""""""""""""""""
+imap <leader>top    <C-v>u22A4
+imap <leader>bot    <C-v>u22A5
+imap <leader>and    <C-v>u2227
+imap <leader>or     <C-v>u2228
+imap <leader>to     <C-v>u2192
+imap <leader>models <C-v>u22A2
 
 
-if system('uname -s') == "Darwin\n"
-  set clipboard=unnamed "OSX
-else
-  set clipboard=unnamedplus "Linux
-endif
+
+"""""""""""""""""""""""""""""""""""""
+"       MATH SYMBOLS                "
+"""""""""""""""""""""""""""""""""""""
+execute pathogen#infect()
+
+
+"""""""""""""""""""""""""""""""""""""
+"           COQ                     "
+"""""""""""""""""""""""""""""""""""""
+nmap <C-c> :CoqRunToCursor<cr>

@@ -20,7 +20,7 @@ export OCAMLPARAM="safe-string=0,_"        ## removes string-bytes error
 ###   RUST   ###  
 ################
 
-if [[ -d "$HOME/.cargo" ]] ; then
+if [[ -d "$HOME/.cargo/env" ]] ; then
     source ~/.cargo/env  ## RUSTUP
 fi
 alias rc='rustc'
