@@ -118,3 +118,16 @@ imap <leader>and    <C-v>u2227
 imap <leader>or     <C-v>u2228
 imap <leader>to     <C-v>u2192
 imap <leader>models <C-v>u22A2
+
+
+
+"""""""""""""""""""""""""""""""""""""
+"       MATH SYMBOLS                "
+"""""""""""""""""""""""""""""""""""""
+execute pathogen#infect()
+
+
+"""""""""""""""""""""""""""""""""""""
+"           COQ                     "
+"""""""""""""""""""""""""""""""""""""
+nmap <C-c> :CoqRunToCursor<cr>

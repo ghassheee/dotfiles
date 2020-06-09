@@ -4,14 +4,13 @@ split-window -h
 select-pane -t 1
 split-window -v
 
-setw main-pane-width 75
+setw main-pane-width 150
 select-layout main-vertical
 
 display-panes
 
 resize-pane -R -t 2 10
 resize-pane -U -t 2 12
-
 
 send-keys -t 1 'clock' enter
 send-keys -t 0 'cd $COQ/ && ll' enter
