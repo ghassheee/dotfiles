@@ -2,7 +2,6 @@
 ###   ENV    ###
 ################
 
-
 source $HOME/.private.zsh
 source $HOME/ghasshee/dotfiles/.env.zsh
 source $DOT/.path.zsh
@@ -15,6 +14,11 @@ if [ -d $DOT/.oh-my-zsh ]
 then
     ZSH=$DOT/.oh-my-zsh
     ZSH_THEME="robbyrussell"
+    #ZSH_THEME="sorin"
+    #ZSH_THEME="refined"
+    #ZSH_THEME="obraun"
+    ZSH_THEME="norm" 
+    ZSH_THEME_GIT_PROMPT_STASHED=""
     DISABLE_AUTO_UPDATE="true"
     UPDATE_ZSH_DAYS=180
     ENABLE_CORRECTION="false"
