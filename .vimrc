@@ -69,3 +69,10 @@ execute 'set rtp^=' . g:opamshare . '/ocp-indent/vim'
 
 let g:deoplete#complete_method = "complete" 
 let g:deoplete#auto_complete_delay = 0
+
+
+if system('uname -s') == "Darwin\n"
+  set clipboard=unnamed "OSX
+else
+  set clipboard=unnamedplus "Linux
+endif
