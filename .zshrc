@@ -18,6 +18,7 @@ then
     #ZSH_THEME="refined"
     #ZSH_THEME="obraun"
     ZSH_THEME="norm" 
+    ZSH_THEME="amuse"
     ZSH_THEME_GIT_PROMPT_STASHED=""
     DISABLE_AUTO_UPDATE="true"
     UPDATE_ZSH_DAYS=180
