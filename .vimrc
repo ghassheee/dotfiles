@@ -67,3 +67,6 @@ execute 'set rtp+=' . g:opamshare . '/merlin/vim'
 
 let g:deoplete#complete_method = "complete" 
 let g:deoplete#auto_complete_delay = 0
+
+filetype plugin on 
+set omnifunc=syntaxcomplete#Complete
