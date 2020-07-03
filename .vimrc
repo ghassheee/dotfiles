@@ -4,10 +4,10 @@
 set runtimepath+=~/.vim
 set runtimepath+=~/vim/vim-syntax-christmas-tree
 
-    source ~/.vim/vimrcs/filetypes.vim
-    source ~/.vim/vimrcs/plugins_config.vim
-    source ~/.vim/vimrcs/extended.vim
-    source ~/.vim/vimrcs/basic.vim
+    source ~/.vim/filetypes.vim
+    source ~/.vim/plugins_config.vim
+    source ~/.vim/extended.vim
+    source ~/.vim/basic.vim
 
 """""""""""""""""""""""""""""""""""""
 "            COLOR                  "

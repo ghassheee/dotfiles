@@ -35,7 +35,7 @@ set guioptions-=L
 " => Fast editing and reloading of vimrc configs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <leader>e  :e! ~/.vimrc<cr>
-map <leader>ee :e! ~/.vim/vimrcs<cr>
+map <leader>ee :e! ~/.vim<cr>
 map <leader>d  :e! ~/ghasshee/dotfiles<cr>
 map <leader>ct :e! ~/vim/vim-syntax-christmas-tree/christmas-tree.txt<cr>
 autocmd! bufwritepost vimrc source ~/.vimrc
