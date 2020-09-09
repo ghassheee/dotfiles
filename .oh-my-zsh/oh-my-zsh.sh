@@ -1,9 +1,7 @@
-# Check for updates on initial load...
-if [ "$DISABLE_AUTO_UPDATE" != "true" ]; then
-  env ZSH=$ZSH DISABLE_UPDATE_PROMPT=$DISABLE_UPDATE_PROMPT zsh -f $ZSH/tools/check_for_upgrade.sh
-fi
+###########################################################
+############# Initializes Oh My Zsh  ######################
+###########################################################
 
-# Initializes Oh My Zsh
 
 # add a function path
 fpath=($ZSH/functions $ZSH/completions $fpath)
@@ -34,7 +32,6 @@ for config_file ($ZSH/lib/*.zsh); do
   source $config_file
 done
 
-
 is_plugin() {
   local base_dir=$1
   local name=$2
@@ -50,7 +47,6 @@ for plugin ($plugins); do
     fpath=($ZSH/plugins/$plugin $fpath)
   fi
 done
-
 # Figure out the SHORT hostname
 if [[ "$OSTYPE" = darwin* ]]; then
   # macOS's $HOST changes with dhcp, etc. Use ComputerName if possible.

@@ -8,7 +8,8 @@ EXISTING_TABS=$(pgrep -f -a '/firefox' | wc -l)
 
 final () {
     #if [ $(pgrep -f -a '/firefox' | wc -l) == "3" ] ; then 
-        pgrep -f -a '/firefox' | awk '{print $5 " " $1}' | sort -nr | awk '{print $2}' | while read line ; do kill $line ; done
+    ps -ax | grep -v grep | grep firefox | awk '{print $1}' | while read line ; do kill $line ; done 
+        ## pgrep -f -a '/firefox' | awk '{print $5 " " $1}' | sort -nr | awk '{print $2}' | while read line ; do kill $line ; done
         killall .firefox-wrapped 
     #else
     #    echo $PIDS | while read line ; do kill $line ; done
@@ -21,7 +22,8 @@ trap final EXIT
 amixer -q sset 'Master' 80%
 firefox --private-window $URL &
 sleep 1; 
-PIDS=$(pgrep -f -a firefox | grep child | awk '{print $5 " " $1}' | sort -n | tail -n 2 | awk '{print $2}')
+PIDS=$(ps -ax | grep -v grep | grep firefox | awk '{print $1}' )
+##PIDS=$(pgrep -f -a firefox | grep child | awk '{print $5 " " $1}' | sort -n | tail -n 2 | awk '{print $2}')
 if [ ! $TIME == "" ] ; then 
     sleep $TIME
 fi

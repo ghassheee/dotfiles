@@ -2,19 +2,24 @@
 ###   ENV    ###
 ################
 
-
 source $HOME/.private.zsh
-source $HOME/.env.zsh
+source $HOME/ghasshee/dotfiles/.env.zsh
+source $DOT/.path.zsh
 
 #################
 ### OH-MY-ZSH ###
 #################
 
-set +u
 if [ -d $DOT/.oh-my-zsh ]
 then
     ZSH=$DOT/.oh-my-zsh
     ZSH_THEME="robbyrussell"
+    #ZSH_THEME="sorin"
+    #ZSH_THEME="refined"
+    #ZSH_THEME="obraun"
+    ZSH_THEME="norm" 
+    ZSH_THEME="amuse"
+    ZSH_THEME_GIT_PROMPT_STASHED=""
     DISABLE_AUTO_UPDATE="true"
     UPDATE_ZSH_DAYS=180
     ENABLE_CORRECTION="false"
@@ -35,13 +40,11 @@ then
     source $ZSH/oh-my-zsh.sh
 fi
 
-
 #################
 ###  GENERAL  ###
 #################
 
 source $DOT/.color.zsh
-source $DOT/.path.zsh
 source $DOT/.alias.zsh
 source $DOT/.language.zsh
 source $DOT/.function.zsh
@@ -56,4 +59,5 @@ set +u
 [[ `uname` == 'Linux'  ]] && source $DOT/.linux.zsh;
 [[ `uname` == 'Darwin' ]] && source $DOT/.macos.zsh;
 
-__ETC_ZSHRC_SOURCED=1
+# __ETC_ZSHRC_SOURCED=1
+
