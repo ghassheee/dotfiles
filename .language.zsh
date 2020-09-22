@@ -9,7 +9,7 @@
 ###############
 
 if [[ -d "$HOME/.opam" ]] ; then  ## OPAM
-    . ~/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+    . ~/.opam/opam-init/init.zsh > /dev/null 2> /dev/null 
     OPAMROOT=~/.opam
     export OCAML_MY_LIBRARY=$HOME/Programs/ml/programming_in_ocaml/base
     alias utop="utop -I $OCAML_MY_LIBRARY"
