@@ -30,8 +30,8 @@ install(){
 [[ `uname` == 'Linux'  ]] && OPTION="sfn"
 [[ `uname` == 'Darwin' ]] && OPTION="sfh"
 
-ln -$OPTION $DOT/.vimrc             $HOME/.vimrc
 ln -$OPTION $DOT/.vim               $HOME/.vim  
+ln -$OPTION $DOT/.vimrc	   	    $HOME/.vimrc
 ln -$OPTION $DOT/.zshrc             $HOME/.zshrc
 ln -$OPTION $DOT/.env.zsh           $HOME/.env.zsh
 ln -$OPTION $DOT/.ocamlinit         $HOME/.ocamlinit    

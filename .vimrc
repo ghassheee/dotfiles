@@ -54,7 +54,7 @@ set ffs=unix,dos,mac  " file type standard
 """""""""""""""""""""""""""""""""""""
 nnoremap <silent><C-n> :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
-let NERDTreeIgnore = ['\.cmo$','\.cmi$']
+let NERDTreeIgnore = ['\.cmo$','\.cmi$','\.hi$','\.o$']
 
 """""""""""""""""""""""""""""""""""""
 "           CLIPBOARD               "
@@ -123,6 +123,14 @@ imap <leader>or     <C-v>u2228
 imap <leader>to     <C-v>u2192
 imap <leader>models <C-v>u22A2
 
+imap <leader>mu     <C-v>u264C
+imap <leader>pi     <C-v>u2650
+imap <leader>Pi     <C-v>u2630
+imap <leader>sigma  <C-v>u2652
+imap <leader>Sigma  <C-v>u2632
+imap <leader>theta  <C-v>u2648
+imap <leader>Gamma  <C-v>u2623
+imap <leader>gamma  <C-v>u2643
 
 
 """""""""""""""""""""""""""""""""""""
