@@ -132,12 +132,6 @@ function xcolorize()
   local bell=$(tput bel)                          # bell/beep
   local y=0
 
-  # Make output unbuffered? (Pass argument -u|--unbuffered to _sed_.)
-  if [ "/$1/" = '/-u/' -o "/$1/" = '/--unbuffered/' ] ; then
-    local UNBUFFERED='-u'; shift
-  else
-    local UNBUFFERED=""
-  fi
 
   # produce separator character ^A (for _sed_)
   local A=$(echo | tr '\012' '\001')
@@ -169,9 +163,12 @@ function xcolorize()
     (( y++ && y>888 )) && { echo "$0: too many arguments" >&2; return 1; }
   done
 
-  # call sed to do the main job
-  sed $UNBUFFERED --regexp-extended -e "$sedrules"
-
+  if [[ `uname` == 'Darwin' ]]
+  then 
+    gsed --regexp-extended -e "$sedrules" 
+  else 
+    sed --regexp-extended -e "$sedrules"
+  fi
   return
 }
 
