@@ -1,5 +1,5 @@
 # VARIABLES
-FILE_MANAGER='Thunar'
+FILE_MANAGER='dolphin'
 export VISUAL='vim'
 export BROWSER="chromium"
 

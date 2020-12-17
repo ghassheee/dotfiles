@@ -20,8 +20,8 @@ endif
 
 try
 "colorscheme desert
-"colorscheme elflord
-colorscheme pablo
+colorscheme elflord
+"colorscheme pablo
 "colorscheme peaksea
 "colorscheme mayansmoke
 "colorscheme ir_black
@@ -142,4 +142,18 @@ execute pathogen#infect()
 """""""""""""""""""""""""""""""""""""
 "           COQ                     "
 """""""""""""""""""""""""""""""""""""
-nmap <C-c> :CoqRunToCursor<cr>
+" nmap <C-c> :CoqRunToCursor<cr>
+
+
+
+nmap <leader>l :CoqToLine<cr>
+filetype plugin on 
+filetype indent on 
+syntax on 
+
+
+
+"       AUTO SAVE                    "
+
+autocmd TextChanged,TextChangedI <buffer> silent write 
+

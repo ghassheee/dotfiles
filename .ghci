@@ -14,4 +14,8 @@
 :def hoogle \s -> return $ ":! hoogle search -l --count=20 \"" ++ s ++ "\""
 :def doc    \s -> return $ ":! hoogle search -l --info     \"" ++ s ++ "\""
 
-
+:m +System.Directory 
+let getLS = getDirectoryContents =<< getCurrentDirectory
+let add_endline files = map (\s -> s ++ "\\\n") files
+let ls = mapM putStrLn =<< getLS
+:def ls \s -> do { files <- getLS; return $ show files }
