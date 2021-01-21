@@ -155,5 +155,7 @@ syntax on
 
 "       AUTO SAVE                    "
 
-autocmd TextChanged,TextChangedI <buffer> silent write 
+" autocmd TextChanged,TextChangedI <buffer> silent write 
 
+
+command GHCI :w | ! ghci %

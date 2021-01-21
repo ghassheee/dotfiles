@@ -43,6 +43,8 @@ OPTION:
 exit;
 fi
 
+alias sage="$(echo /nix/store/pw*sage-8.9/bin/sage)"
+
 F1="f1"; F2="f2"; F3="f3"
 VARS="x,y,z"; ARGS1=$VARS; ARGS2=$VARS; ARGS3=$VARS
 APP_RANGE="r(x),r(y),r(z)"

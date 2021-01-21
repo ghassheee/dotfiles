@@ -169,3 +169,7 @@ alias arpscan='sudo arp-scan --interface=$BROADCAST_INTERFACE --localnet'
 # alias parity-classic="$PARITY ui --datadir $PARITY_CLASSIC_DATADIR --chain classic --warp --jsonrpc-apis \"web3,eth,net,parity,traces,rpc,personal\""
 
 alias mupdf='mupdf-x11'
+
+
+## SCHEME 
+alias scheme='rlwrap scheme' 
