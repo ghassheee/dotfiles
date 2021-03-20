@@ -1,11 +1,11 @@
 #####################
 ###     BASIC     ###
 #####################
-alias l='ls -FG'
+alias l='ls -XFG'
 alias la='ls -aFG'
-alias ll='ls -lFG'
-alias lll='ls -alhG'
-alias lla='ls -alhG'
+alias ll='ls -lXhFG'
+alias lll='ls -alhFGt'
+alias lla='ls -alhFGt'
 alias lss='ll | less'
 alias mv='mv -i'
 alias rm='rm -i'
@@ -18,6 +18,7 @@ alias cl='clear'
 alias bin="cd $DOT/.bin"
 alias globalip='curl ifconfig.me'
 alias src='source ~/.zshrc'
+alias mk='make' 
 
 alias jctl='journalctl'
 alias sctl='systemctl'

@@ -20,11 +20,11 @@ endif
 
 try
 "colorscheme desert
-colorscheme elflord
-"colorscheme pablo
+"colorscheme elflord
+colorscheme pablo
 "colorscheme peaksea
 "colorscheme mayansmoke
-"colorscheme ir_black
+colorscheme ir_black
 "colorscheme morning
 "colorscheme ron
 "colorscheme pyte
@@ -55,6 +55,7 @@ set ffs=unix,dos,mac  " file type standard
 nnoremap <silent><C-n> :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
 let NERDTreeIgnore = ['\.cmo$','\.cmi$','\.hi$','\.o$']
+map <leader>b :bp<CR>
 
 """""""""""""""""""""""""""""""""""""
 "           CLIPBOARD               "
@@ -134,7 +135,7 @@ imap <leader>gamma  <C-v>u2643
 
 
 """""""""""""""""""""""""""""""""""""
-"       MATH SYMBOLS                "
+"       pathogen init (bundle dir)  "
 """""""""""""""""""""""""""""""""""""
 execute pathogen#infect()
 
@@ -142,11 +143,15 @@ execute pathogen#infect()
 """""""""""""""""""""""""""""""""""""
 "           COQ                     "
 """""""""""""""""""""""""""""""""""""
-" nmap <C-c> :CoqRunToCursor<cr>
 
+function HoTT()
+    let g:coqtail_coq_path = '/home/ghasshee/HoTT'
+    let g:coqtail_coq_prog = 'hoqidetop' 
+    echo 'HOTT LOADED.'
+endfunction 
+command HOTT :exe HoTT()
 
-
-nmap <leader>l :CoqToLine<cr>
+nmap <leader>l :CoqToTop<cr>:CoqToLine<cr>
 filetype plugin on 
 filetype indent on 
 syntax on 
@@ -157,5 +162,10 @@ syntax on
 
 " autocmd TextChanged,TextChangedI <buffer> silent write 
 
+command GHCI9 :w | ! /usr/local/bin/ghci % 
+command GHCI  :w | ! ghci %
+command SCM   :w | ! rlwrap scheme --load %
 
-command GHCI :w | ! ghci %
+
+
+command ML :w | ! ocaml %
