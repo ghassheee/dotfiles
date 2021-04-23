@@ -1,7 +1,7 @@
 ## To move directories in terminal,
 ## The command must be built-in
 
-loop() {
+loop(){
     while true;
     do 
         $@;
