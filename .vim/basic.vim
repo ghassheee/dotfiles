@@ -60,7 +60,7 @@ set incsearch
 """"""""""""""""""""""""""""""""""""""""
 set nobackup                                " Turn backup off, since most stuff is in SVN, git et.c anyway...
 set nowb
-set noswapfile
+"set noswapfile
 
 """"""""""""""""""""""""""""""""""""""""
 "    Text, tab and indent related      "

@@ -1,11 +1,11 @@
 #####################
 ###     BASIC     ###
 #####################
-alias l='ls -FG'
+alias l='ls -XFG'
 alias la='ls -aFG'
-alias ll='ls -lFG'
-alias lll='ls -alhG'
-alias lla='ls -alhG'
+alias ll='ls -lXhFG'
+alias lll='ls -alhFGt'
+alias lla='ls -alhFGt'
 alias lss='ll | less'
 alias mv='mv -i'
 alias rm='rm -i'
@@ -18,6 +18,7 @@ alias cl='clear'
 alias bin="cd $DOT/.bin"
 alias globalip='curl ifconfig.me'
 alias src='source ~/.zshrc'
+alias mk='make' 
 
 alias jctl='journalctl'
 alias sctl='systemctl'
@@ -169,3 +170,7 @@ alias arpscan='sudo arp-scan --interface=$BROADCAST_INTERFACE --localnet'
 # alias parity-classic="$PARITY ui --datadir $PARITY_CLASSIC_DATADIR --chain classic --warp --jsonrpc-apis \"web3,eth,net,parity,traces,rpc,personal\""
 
 alias mupdf='mupdf-x11'
+
+
+## SCHEME 
+alias scheme='rlwrap scheme' 

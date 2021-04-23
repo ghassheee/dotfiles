@@ -8,8 +8,8 @@ split-window -v
 
 display-panes
 
-resize-pane -R -t 0 22
-resize-pane -U -t 2 12
+resize-pane -R -t 0 12
+resize-pane -U -t 2 20
 
 
 send-keys -t 1 'clock' enter
