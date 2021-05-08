@@ -1,9 +1,9 @@
 #####################
 ###     BASIC     ###
 #####################
-alias l='ls -XFG'
+alias l='ls -FG'
 alias la='ls -aFG'
-alias ll='ls -lXhFG'
+alias ll='ls -lhFG'
 alias lll='ls -alhFGt'
 alias lla='ls -alhFGt'
 alias lss='ll | less'
