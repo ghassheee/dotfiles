@@ -106,15 +106,6 @@ endfunction
 
 
 """""""""""""""""""""""""""""""""""""
-"            MERLIN                 "
-"""""""""""""""""""""""""""""""""""""
-let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
-execute 'set rtp+=' . g:opamshare . '/merlin/vim'
-execute 'set rtp^=' . g:opamshare . '/ocp-indent/vim'
-" auto-completion shortcut:  Ctrl-f 
-imap <C-f> <C-x><C-o>
-
-"""""""""""""""""""""""""""""""""""""
 "       MATH SYMBOLS                "
 """""""""""""""""""""""""""""""""""""
 imap <leader>top    <C-v>u22A4
@@ -141,6 +132,13 @@ execute pathogen#infect()
 
 
 """""""""""""""""""""""""""""""""""""
+"       AUTO SAVE                   "
+"""""""""""""""""""""""""""""""""""""
+
+" autocmd TextChanged,TextChangedI <buffer> silent write 
+
+
+"""""""""""""""""""""""""""""""""""""
 "           COQ                     "
 """""""""""""""""""""""""""""""""""""
 
@@ -158,14 +156,29 @@ syntax on
 
 
 
-"       AUTO SAVE                    "
-
-" autocmd TextChanged,TextChangedI <buffer> silent write 
+"""""""""""""""""""""""""""""""""""""
+"         HASKELL                   "
+"""""""""""""""""""""""""""""""""""""
 
 command GHCI9 :w | ! /usr/local/bin/ghci % 
 command GHCI  :w | ! ghci %
 command SCM   :w | ! rlwrap scheme --load %
 
 
+"""""""""""""""""""""""""""""""""""""
+"          OCAML                    "
+"""""""""""""""""""""""""""""""""""""
 
 command ML :w | ! ocaml %
+
+
+"""""""""""""""""""""""""""""""""""""
+"            MERLIN                 "
+"""""""""""""""""""""""""""""""""""""
+let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+execute 'set rtp+=' . g:opamshare . '/merlin/vim'
+execute 'set rtp^=' . g:opamshare . '/ocp-indent/vim'
+" auto-completion shortcut:  Ctrl-f 
+imap <C-f> <C-x><C-o>
+
+

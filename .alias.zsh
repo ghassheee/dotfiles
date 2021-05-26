@@ -19,6 +19,7 @@ alias bin="cd $DOT/.bin"
 alias globalip='curl ifconfig.me'
 alias src='source ~/.zshrc'
 alias mk='make' 
+alias mkl='make clean' 
 
 alias jctl='journalctl'
 alias sctl='systemctl'
@@ -174,3 +175,7 @@ alias mupdf='mupdf-x11'
 
 ## SCHEME 
 alias scheme='rlwrap scheme' 
+
+
+## SMLSharp 
+alias smlsharp='rlwrap smlsharp'

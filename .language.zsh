@@ -24,6 +24,9 @@ if [[ -d "$HOME/.cargo/env" ]] ; then
     source ~/.cargo/env  ## RUSTUP
 fi
 alias rc='rustc'
+export OPENSSL_DIR=$HOME/.openssl_dir
+export CARGO_HOME=$HOME/.cargo
+export PATH=$HOME/.cargo/bin:$PATH
 
 ###############
 ### HASKELL ###
