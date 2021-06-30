@@ -19,17 +19,17 @@ if $COLORTERM == 'gnome-terminal'
 endif
 
 try
-"colorscheme desert
-"colorscheme elflord
+colorscheme mayansmoke
+colorscheme elflord
 colorscheme pablo
+"colorscheme ir_black
+"colorscheme desert
 "colorscheme peaksea
-"colorscheme mayansmoke
-colorscheme ir_black
 "colorscheme morning
-"colorscheme ron
-"colorscheme pyte
-"colorscheme zellner
 "colorscheme delek
+""colorscheme ron
+""colorscheme pyte
+""colorscheme zellner
 catch
 endtry
 
@@ -106,6 +106,15 @@ endfunction
 
 
 """""""""""""""""""""""""""""""""""""
+"            MERLIN                 "
+"""""""""""""""""""""""""""""""""""""
+let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+execute 'set rtp+=' . g:opamshare . '/merlin/vim'
+execute 'set rtp^=' . g:opamshare . '/ocp-indent/vim'
+" auto-completion shortcut:  Ctrl-f 
+imap <C-f> <C-x><C-o>
+
+"""""""""""""""""""""""""""""""""""""
 "       MATH SYMBOLS                "
 """""""""""""""""""""""""""""""""""""
 imap <leader>top    <C-v>u22A4
@@ -169,16 +178,11 @@ command SCM   :w | ! rlwrap scheme --load %
 "          OCAML                    "
 """""""""""""""""""""""""""""""""""""
 
-command ML :w | ! ocaml %
+command OCAML :w | ! rlwrap ocaml
 
 
-"""""""""""""""""""""""""""""""""""""
-"            MERLIN                 "
-"""""""""""""""""""""""""""""""""""""
-let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
-execute 'set rtp+=' . g:opamshare . '/merlin/vim'
-execute 'set rtp^=' . g:opamshare . '/ocp-indent/vim'
-" auto-completion shortcut:  Ctrl-f 
-imap <C-f> <C-x><C-o>
+command TM    :bo vert term
+command MK    :bo vert term make
+command MKL   :bo vert term make clean
 
-
+nmap <leader>q :q<CR>

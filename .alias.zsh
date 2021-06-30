@@ -117,7 +117,7 @@ ghasshee() {
 ###     Git      ###
 ####################
 alias pull='     git pull   '
-alias push='     git add --all; git commit -m "Updated"; git push '
+alias push='     make clean; git add --all; git commit -m "Updated"; git push '
 alias commit='   git add --all; git commit -m "Updated"           '
 gitglobal() {git config --global user.email "${1}@gmail.com"; git config --global user.name $1; }
 

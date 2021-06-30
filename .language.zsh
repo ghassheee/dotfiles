@@ -14,7 +14,7 @@ if [[ -d "$HOME/.opam" ]] ; then  ## OPAM
     export OCAML_MY_LIBRARY=$HOME/Programs/ml/programming_in_ocaml/base
     alias utop="utop -I $OCAML_MY_LIBRARY"
 fi                       
-export OCAMLPARAM="safe-string=0,_"        ## removes string-bytes error
+## export OCAMLPARAM="safe-string=0,_"        ## removes string-bytes error
 
 ################
 ###   RUST   ###  
