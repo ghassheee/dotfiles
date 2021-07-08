@@ -243,3 +243,17 @@ video(){
     done
 }
 } 
+
+
+unko () {
+gnuplot -e "
+        set terminal gif anim;
+        set output 'unko.gif';
+        se hid;
+        se pa;
+        se is 100,10;
+        se vi equal xyz;
+        do for[i=1:30]{
+            se vi 60,360-12*i;
+            sp [0:6*pi][-pi:pi] u*cos(u)*(cos(v)+1),u*sin(u)*(cos(v)+1),u*sin(v)-((u+3)/8*pi)**2-20}"
+}
