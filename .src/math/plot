@@ -43,7 +43,9 @@ OPTION:
 exit;
 fi
 
-alias sage="$(echo /nix/store/pw*sage-8.9/bin/sage)"
+# alias sage="$(echo /nix/store/pw*sage-8.9/bin/sage)"
+alias sage="$(echo /nix/store/*sage-9.3/bin/sage)"
+
 
 F1="f1"; F2="f2"; F3="f3"
 VARS="x,y,z"; ARGS1=$VARS; ARGS2=$VARS; ARGS3=$VARS
@@ -66,7 +68,7 @@ HESS_F="ddf(x,x)*ddf(y,y)*ddf(z,z) + ddf(x,y)*ddf(y,z)*ddf(z,x) + ddf(x,z)*ddf(z
 if [[ $1 == "threejs" ]] ; then 
     VIEWER="viewer='$1'"; shift; 
 else
-    VIEWER=''
+    VIEWER='jmol'
 fi
 
 if [[ $1 == "sphere" ]] ; then 
@@ -112,6 +114,6 @@ echo "
     p += implicit_plot3d($APP_FUN1 ,$APP_RANGE, frame=False,color='yellow')
     p += implicit_plot3d($APP_FUN2 ,$APP_RANGE, frame=False,color='red')
     p += implicit_plot3d($APP_FUN3 ,$APP_RANGE, frame=False,color='white')
-    show(p,$VIEWER)
+    show(p,viewer='$VIEWER')
     sleep(2)
 " | sage;
