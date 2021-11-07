@@ -5,4 +5,4 @@ nix-pkg-path(){
 }
 
 
-alias sage="$(echo /nix/store/pw*sage-8.9/bin/sage)"
+#alias sage="$(echo /nix/store/pw*sage-8.9/bin/sage)"
