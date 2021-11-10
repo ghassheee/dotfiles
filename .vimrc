@@ -19,17 +19,17 @@ if $COLORTERM == 'gnome-terminal'
 endif
 
 try
-"colorscheme desert
-"colorscheme elflord
+colorscheme mayansmoke
+colorscheme elflord
 colorscheme pablo
-"colorscheme peaksea
-"colorscheme mayansmoke
 "colorscheme ir_black
+"colorscheme desert
+"colorscheme peaksea
 "colorscheme morning
-"colorscheme ron
-"colorscheme pyte
-"colorscheme zellner
 "colorscheme delek
+""colorscheme ron
+""colorscheme pyte
+""colorscheme zellner
 catch
 endtry
 
@@ -55,6 +55,7 @@ set ffs=unix,dos,mac  " file type standard
 nnoremap <silent><C-n> :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
 let NERDTreeIgnore = ['\.cmo$','\.cmi$','\.hi$','\.o$']
+map <leader>b :bp<CR>
 
 """""""""""""""""""""""""""""""""""""
 "           CLIPBOARD               "
@@ -134,12 +135,54 @@ imap <leader>gamma  <C-v>u2643
 
 
 """""""""""""""""""""""""""""""""""""
-"       MATH SYMBOLS                "
+"       pathogen init (bundle dir)  "
 """""""""""""""""""""""""""""""""""""
 execute pathogen#infect()
 
 
 """""""""""""""""""""""""""""""""""""
+"       AUTO SAVE                   "
+"""""""""""""""""""""""""""""""""""""
+
+" autocmd TextChanged,TextChangedI <buffer> silent write 
+
+
+"""""""""""""""""""""""""""""""""""""
 "           COQ                     "
 """""""""""""""""""""""""""""""""""""
-nmap <C-c> :CoqRunToCursor<cr>
+
+function HoTT()
+    let g:coqtail_coq_path = '/home/ghasshee/HoTT'
+    let g:coqtail_coq_prog = 'hoqidetop' 
+    echo 'HOTT LOADED.'
+endfunction 
+command HOTT :exe HoTT()
+
+nmap <leader>l :CoqToTop<cr>:CoqToLine<cr>
+filetype plugin on 
+filetype indent on 
+syntax on 
+
+
+
+"""""""""""""""""""""""""""""""""""""
+"         HASKELL                   "
+"""""""""""""""""""""""""""""""""""""
+
+command GHCI9 :w | ! /usr/local/bin/ghci % 
+command GHCI  :w | ! ghci %
+command SCM   :w | ! rlwrap scheme --load %
+
+
+"""""""""""""""""""""""""""""""""""""
+"          OCAML                    "
+"""""""""""""""""""""""""""""""""""""
+
+command OCAML :w | ! rlwrap ocaml 
+
+
+command TM    :bo vert term
+command MK    :bo vert term make
+command MKL   :bo vert term make clean
+
+nmap <leader>q :q<CR>

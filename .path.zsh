@@ -6,8 +6,9 @@
 
 PATH="/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin"
 PATH=$PATH:"$HOME/.local/bin"
-PATH=$PATH:"/usr/texbin"
+#PATH=$PATH:"/usr/texbin"
 PATH=$PATH:"$HOME/.bin"
+
 PATH="/run/current-system/sw/bin":$PATH
 PATH="/run/wrappers/bin":$PATH
 

@@ -3,9 +3,9 @@
 #####################
 alias l='ls -FG'
 alias la='ls -aFG'
-alias ll='ls -lFG'
-alias lll='ls -alhG'
-alias lla='ls -alhG'
+alias ll='ls -lhFG'
+alias lll='ls -alhFGt'
+alias lla='ls -alhFGt'
 alias lss='ll | less'
 alias mv='mv -i'
 alias rm='rm -i'
@@ -18,6 +18,8 @@ alias cl='clear'
 alias bin="cd $DOT/.bin"
 alias globalip='curl ifconfig.me'
 alias src='source ~/.zshrc'
+alias mk='make' 
+alias mkl='make clean' 
 
 alias jctl='journalctl'
 alias sctl='systemctl'
@@ -117,7 +119,7 @@ ghasshee() {
 ###     Git      ###
 ####################
 alias pull='     git pull   '
-alias push='     git add --all; git commit -m "Updated"; git push '
+alias push='     make clean; git add --all; git commit -m "Updated"; git push '
 alias commit='   git add --all; git commit -m "Updated"           '
 gitglobal() {git config --global user.email "${1}@gmail.com"; git config --global user.name $1; }
 
@@ -171,3 +173,11 @@ alias arpscan='sudo arp-scan --interface=$BROADCAST_INTERFACE --localnet'
 # alias parity-classic="$PARITY ui --datadir $PARITY_CLASSIC_DATADIR --chain classic --warp --jsonrpc-apis \"web3,eth,net,parity,traces,rpc,personal\""
 
 alias mupdf='mupdf-x11'
+
+
+## SCHEME 
+alias scheme='rlwrap scheme' 
+
+
+## SMLSharp 
+alias smlsharp='rlwrap smlsharp'

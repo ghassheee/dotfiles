@@ -42,6 +42,9 @@ ln -$OPTION $DOT/.bin               $HOME/.bin
 ln -$OPTION $DOT/dot                $HOME/.bin/dot
 ln -$OPTION $DOT/.tmux              $HOME/.tmux
 ln -$OPTION $DOT/.tmux.conf         $HOME/.tmux.conf
+ln -$OPTION $DOT/.emacs.d           $HOME/.emacs.d
+ln -$OPTION $DOT/.spacemacs         $HOME/.spacemacs
+ln -$OPTION $DOT/.spacemacs.env     $HOME/.spacemacs.env
 
 if [[ `uname` == "Linux" ]] ; then
 ln -$OPTION $DOT/.Xmodmap           $HOME/.Xmodmap

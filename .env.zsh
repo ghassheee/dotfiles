@@ -1,4 +1,5 @@
 
+export HOSTNAME="ghasshee"
 export DOT=$HOME/ghasshee/dotfiles
 export NIX=$HOME/ghasshee/nixos
 export DESK=$HOME/Desktop

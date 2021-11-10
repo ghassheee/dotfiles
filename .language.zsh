@@ -14,7 +14,7 @@ if [[ -d "$HOME/.opam" ]] ; then  ## OPAM
     export OCAML_MY_LIBRARY=$HOME/Programs/ml/programming_in_ocaml/base
     alias utop="utop -I $OCAML_MY_LIBRARY"
 fi                       
-export OCAMLPARAM="safe-string=0,_"        ## removes string-bytes error
+## export OCAMLPARAM="safe-string=0,_"        ## removes string-bytes error
 
 ################
 ###   RUST   ###  
@@ -24,6 +24,9 @@ if [[ -d "$HOME/.cargo/env" ]] ; then
     source ~/.cargo/env  ## RUSTUP
 fi
 alias rc='rustc'
+export OPENSSL_DIR=$HOME/.openssl_dir
+export CARGO_HOME=$HOME/.cargo
+export PATH=$HOME/.cargo/bin:$PATH
 
 ###############
 ### HASKELL ###
