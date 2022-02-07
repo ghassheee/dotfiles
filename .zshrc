@@ -49,8 +49,7 @@ source $DOT/.alias.zsh
 source $DOT/.language.zsh
 source $DOT/.function.zsh
 source $DOT/.ipban.zsh
-source $DOT/.nix.zsh
-
+[[ `uname` == 'Linux'  ]] && source $DOT/.nix.zsh;
 
 #################
 ###    O S    ###

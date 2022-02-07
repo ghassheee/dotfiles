@@ -58,7 +58,7 @@ export PATH=$PATH:"$GOPATH/bin":"$GOROOT/bin"
 ################
 
 if   [[ `uname` == 'Linux'  ]]; then     PATH=$PATH:$HOME/.gem/bin;
-elif [[ `uname` == 'Darwin' ]]; then     eval "$(rbenv init -)";
+elif [[ `uname` == 'Darwin' ]]; then    ;  # eval "$(rbenv init -)";
 fi
 
 
