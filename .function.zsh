@@ -1,7 +1,7 @@
 ## To move directories in terminal,
 ## The command must be built-in
 
-loop(){
+loop () {
     while true;
     do 
         $@;
@@ -9,19 +9,20 @@ loop(){
     done
 }
 
-music(){
-    set +u
-    if   [[ -z $1 ]] ; then 
-        [[ -z $MUSIC ]] || cd $MUSIC;
-    elif [[ "$1" == "list" ]] ; then
-        ls $MUSIC;
-    else 
-        $HOME/.bin/music $@
-    fi
-    set -u
-}
 
-dot(){
+# music () {
+#     set +u
+#     if   [[ -z $1 ]] ; then 
+#         [[ -z $MUSIC ]] || cd $MUSIC;
+#     elif [[ "$1" == "list" ]] ; then
+#         ls $MUSIC;
+#     else 
+#         $HOME/.bin/music $@
+#     fi
+#     set -u
+# }
+# 
+dot () {
     set +u
     if [[ -z $1 ]] ; then ; cd $DOT;
     else
