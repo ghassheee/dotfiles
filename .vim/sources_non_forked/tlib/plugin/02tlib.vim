@@ -63,7 +63,7 @@ command! -nargs=+ TVarArg exec tlib#arg#Let([<args>])
 "
 " EXAMPLES: >
 "   TBrowseOutput 20verb TeaseTheCulprit
-command! -nargs=1 -complete=command TBrowseOutput call tlib#cmd#BrowseOutput(<q-args>)
+"command! -nargs=1 -complete=command TBrowseOutput call tlib#cmd#BrowseOutput(<q-args>)
 
 
 " :display: :TBrowseScriptnames
@@ -74,7 +74,7 @@ command! -nargs=1 -complete=command TBrowseOutput call tlib#cmd#BrowseOutput(<q-
 "
 " EXAMPLES: >
 "   TBrowseScriptnames 
-command! -nargs=0 -complete=command TBrowseScriptnames call tlib#cmd#TBrowseScriptnames()
+""command! -nargs=0 -complete=command TBrowseScriptnames call tlib#cmd#TBrowseScriptnames()
 
 
 " :display: :Tlibtrace GUARD, VAR1, VAR2...

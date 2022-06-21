@@ -1,0 +1,24 @@
+
+split-window -h
+select-pane -t 1
+split-window -v
+select-pane -t 0
+## split-window -v
+
+#setw main-pane-width 75
+#select-layout main-vertical
+
+display-panes
+
+resize-pane -R -t 0 22
+resize-pane -U -t 2 12
+## resize-pane -D -t 0 12
+
+
+send-keys -t 1 'geth --http --datadir.ancient /home/blockchain/ancient-old --datadir /home/blockchain/.ethereum-old --syncmode fast' enter
+send-keys -t 2 '~/eth2.0/prysm/prysm.sh beacon-chain --http-web3provider=http://localhost:8545 --p2p-max-peers 140' enter
+send-keys -t 0 '~/eth2.0/prysm/prysm.sh validator --web' enter
+## send-keys -t 3 '~/eth2.0/prysm/prysm.sh slasher' enter
+
+
+select-pane -t 0

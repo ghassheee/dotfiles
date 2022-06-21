@@ -49,16 +49,17 @@ source $DOT/.alias.zsh
 source $DOT/.language.zsh
 source $DOT/.function.zsh
 source $DOT/.ipban.zsh
-source $DOT/.nix.zsh
-
+is_linux && source $DOT/.nix.zsh;
 
 #################
 ###    O S    ###
 #################
 
 set +u
-[[ `uname` == 'Linux'  ]] && source $DOT/.linux.zsh;
-[[ `uname` == 'Darwin' ]] && source $DOT/.macos.zsh;
+is_linux && source $DOT/.linux.zsh;
+is_macos && source $DOT/.macos.zsh;
 
+
+is_ubuntu && xmodmap $DOT/.Xmodmap
 # __ETC_ZSHRC_SOURCED=1
 

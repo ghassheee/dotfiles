@@ -196,7 +196,8 @@ timeOfDay=$(date +'%p' | sed 's/AM/A M/')
 #play chimes?
 chime="${chime:-true}"
 #command used to play sounds
-soundCommand="${soundCommand:-play -qV0}"
+#soundCommand="${soundCommand:-play -qV0}"
+soundCommand="${soundCommand:-play }"
 #default voice for speaking time is espeak
 voice="${voice:-espeak}"
 #should the time be spoken?

@@ -1,7 +1,20 @@
 ## To move directories in terminal,
 ## The command must be built-in
 
-loop(){
+
+is_ubuntu () { 
+    [[ `cat /etc/issue | head -1 | tail -1 | cut -d " " -f 1` == "Ubuntu" ]] 
+}
+
+is_linux () { 
+    [[ `uname` == 'Linux'  ]] 
+}
+
+is_macos () { 
+    [[ `uname` == 'Darwin' ]] 
+} 
+
+loop () {
     while true;
     do 
         $@;
@@ -9,21 +22,24 @@ loop(){
     done
 }
 
-music(){
-    set +u
-    if   [[ -z $1 ]] ; then 
-        [[ -z $MUSIC ]] || cd $MUSIC;
-    elif [[ "$1" == "list" ]] ; then
-        ls $MUSIC;
-    else 
-        $HOME/.bin/music $@
-    fi
-    set -u
-}
 
-dot(){
+# music () {
+#     set +u
+#     if   [[ -z $1 ]] ; then 
+#         [[ -z $MUSIC ]] || cd $MUSIC;
+#     elif [[ "$1" == "list" ]] ; then
+#         ls $MUSIC;
+#     else 
+#         $HOME/.bin/music $@
+#     fi
+#     set -u
+# }
+# 
+
+
+dot () {
     set +u
-    if [[ -z $1 ]] ; then ; cd $DOT;
+    if [[ -z $1 ]] ; then cd $DOT;
     else
         $DOT/dot $@;
     fi
