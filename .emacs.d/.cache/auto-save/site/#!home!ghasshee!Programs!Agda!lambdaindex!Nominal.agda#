@@ -1,0 +1,24 @@
+module Nominal where
+  record Nominal : Set₂ where
+  field
+    Sort : Set₁
+    Atom : Sort
+    1ᵉ   : Sort
+    _×ᵉ_ : Sort → Sort → Sort
+    _→ᵉ_ : Sort → Sort → Set
+    absᵉ : Sort → Sort
+    -- lots of axioms omitted
+
+  open Nominal {{...}}
+
+
+  module _ {{_ : Nominal}} where
+    record Syntax : Set₁ where
+      field
+        Tm : Sort
+        var : Atom →ᵉ Tm
+        app : (Tm ×ᵉ Tm) →ᵉ Tm
+        lam : (absᵉ Tm) →ᵉ Tm
+
+        --induction principle omitted
+
