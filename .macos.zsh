@@ -35,7 +35,5 @@ alias cellar="cd $CELLAR"                   ## Cellar
 alias cache='cd /Library/Caches'            ## Cache
 alias music='cd ~/Music/iTunes/iTunes\ Media/Music'
 alias briss='java -jar /Applications/briss-0.9.2/briss-0.9.jar'
-alias python='/usr/local/bin/python'
 alias sed='/usr/local/bin/gsed'
 alias sage='/Applications/SageMath/sage'
-alias awk='/usr/local/bin/awk'

@@ -4,9 +4,8 @@
 ################
 
 
-PATH="/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin"
+PATH="/bin:/sbin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin"
 PATH=$PATH:"$HOME/.local/bin"
-#PATH=$PATH:"/usr/texbin"
 PATH=$PATH:"$HOME/.bin"
 
 PATH="/run/current-system/sw/bin":$PATH
@@ -41,3 +40,4 @@ export MANPATH
 export LIBRARY_PATH="/usr/local/lib"
 export C_INCLUDE_PATH="/opt/X11/include"
 
+#PATH=$PATH:"/usr/texbin"

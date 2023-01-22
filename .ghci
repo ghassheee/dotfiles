@@ -11,7 +11,7 @@
 :set -ddump-deriv
 
 -- hoogle
-:def hoogle \s -> return $ ":! hoogle search -l --count=20 \"" ++ s ++ "\""
+:def hoogle \s -> return $ ":! hoogle search -l --count=100 \"" ++ s ++ "\""
 :def doc    \s -> return $ ":! hoogle search -l --info     \"" ++ s ++ "\""
 
 :m +System.Directory 

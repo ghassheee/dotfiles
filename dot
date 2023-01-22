@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 [[ "$DOT" == "" ]] && DOT=$HOME/ghasshee/dotfiles
 source $DOT/.env.zsh
@@ -21,6 +21,9 @@ deploy(){
     done
     echo "Done."
 }
+
+
+
 
 install(){
 ## [ -d ~/.vim ] || git clone https://www.github.com/ghassheee/vimrc ~/.vim
@@ -46,10 +49,17 @@ ln -$OPTION $DOT/.emacs.d           $HOME/.emacs.d
 ln -$OPTION $DOT/.spacemacs         $HOME/.spacemacs
 ln -$OPTION $DOT/.spacemacs.env     $HOME/.spacemacs.env
 
-if [[ `uname` == "Linux" ]] ; then
+source $DOT/.function.zsh
+
+is_linux && {
 ln -$OPTION $DOT/.Xmodmap           $HOME/.Xmodmap
 ln -$OPTION $DOT/.xinitrc           $HOME/.xprofile
-fi
+}
+
+is_ubuntu && {
+    unlink $HOME/.Xmodmap;
+}
+
 }
 
 uninstall(){

@@ -178,7 +178,7 @@ command SCM   :w | ! rlwrap scheme --load %
 "          OCAML                    "
 """""""""""""""""""""""""""""""""""""
 
-command OCAML :w | ! rlwrap ocaml 
+command OCAML :w | ! rlwrap -n ocaml %
 
 
 command TM    :bo vert term
