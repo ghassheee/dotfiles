@@ -3,7 +3,8 @@ split-window -h
 select-pane -t 1
 split-window -v
 select-pane -t 0
-## split-window -v
+split-window -v
+select-pane -t 0
 
 #setw main-pane-width 75
 #select-layout main-vertical
@@ -12,13 +13,13 @@ display-panes
 
 resize-pane -R -t 0 22
 resize-pane -U -t 2 12
-## resize-pane -D -t 0 12
+resize-pane -D -t 0 16
 
 
-send-keys -t 1 'geth --http --datadir.ancient /home/blockchain/ancient-old --datadir /home/blockchain/.ethereum-old --syncmode fast' enter
-send-keys -t 2 '~/eth2.0/prysm/prysm.sh beacon-chain --http-web3provider=http://localhost:8545 --p2p-max-peers 140' enter
-send-keys -t 0 '~/eth2.0/prysm/prysm.sh validator --web' enter
-## send-keys -t 3 '~/eth2.0/prysm/prysm.sh slasher' enter
-
+send-keys -t 1 'while true ; do ping -c 1 1.1.1.1 || espeak-ng "Internet is not connected. Internet is not connected." ; sleep 3; done' enter
+send-keys -t 2 'geth --http --http.api eth,net,engine,admin --authrpc.jwtsecret ~/jwt.hex || while true; do espeak-ng "POW chain is not working." ; sleep 2; done & geth --http --http.api eth,net,engine,admin --authrpc.jwtsecret ~/jwt.hex' enter
+send-keys -t 3 '~/eth2.0/prysm/prysm.sh beacon-chain --execution-endpoint=http://localhost:8551 --jwt-secret=~/jwt.hex --p2p-max-peers 420 || while true; do espeak-ng "Validation does not work"; sleep 2; done' enter
+send-keys -t 0 '~/eth2.0/prysm/prysm.sh validator --web --proposer-settings-file=./fee-recipient.json || while true; do espeak-ng "Eth 2.0 chain is not working."; sleep 2; done' enter
+## send-keys -t 4 '~/eth2.0/prysm/prysm.sh slasher' enter
 
 select-pane -t 0
