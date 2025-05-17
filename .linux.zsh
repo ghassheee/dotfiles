@@ -34,13 +34,13 @@ alias mouse='bluetoothmouse'
 alias open=$FILE_MANAGER
 
 # ibus 
-export XIM=ibus
-export XIM_PROGRAM=/usr/bin/ibus-daemon
-export XIM_ARGS="--xim"
-export GTK_IM_MODULE="ibus"
-export XMODIFIERS="@im=ibus"
-export QT_IM_MODUEL="ibus"
-ibus-daemon -d -x
+#export XIM=ibus
+#export XIM_PROGRAM=/usr/bin/ibus-daemon
+#export XIM_ARGS="--xim"
+#export GTK_IM_MODULE="ibus"
+#export XMODIFIERS="@im=ibus"
+#export QT_IM_MODUEL="ibus"
+#ibus-daemon -d -x --panel disable
 
 # get IP 
 export BROADCAST_INTERFACE=$(ip addr | grep BROADCAST | awk '{print $2}' | sed 's/://')

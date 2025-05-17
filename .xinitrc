@@ -4,9 +4,9 @@ source $HOME/ghasshee/dotfiles/.function.zsh
 is_ubuntu || source $DOT/.Xmodmap
 is_ubuntu && xmodmap $DOT/.Xmodmap
 #export QT_IM_MODULE=fcitx
-export QT_IM_MODULE="ibus"
-export GTK_IM_MODULE="ibus"
-export XMODIFIERS="@im=ibus"
+#export QT_IM_MODULE="ibus"
+#export GTK_IM_MODULE="ibus"
+#export XMODIFIERS="@im=ibus"
 xbacklight -set 30
 xset x off -dpms
 

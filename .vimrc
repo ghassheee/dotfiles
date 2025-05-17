@@ -20,11 +20,11 @@ endif
 
 try
 colorscheme mayansmoke
-colorscheme elflord
-colorscheme pablo
+"colorscheme elflord
+":colorscheme pablo
 "colorscheme ir_black
-"colorscheme desert
-"colorscheme peaksea
+colorscheme desert
+colorscheme peaksea
 "colorscheme morning
 "colorscheme delek
 ""colorscheme ron
@@ -41,6 +41,26 @@ if has("gui_running")       " gvim
     set t_Co=256
     set guitablabel=%M\ %t
 endif
+
+"""""""""""""""""""""""""""""""""""""
+"          SCROLLING                "
+"""""""""""""""""""""""""""""""""""""
+"nnoremap <C-e> 3<C-e>
+"nnoremap <C-y> 3<C-y> 
+"nnoremap <Down> 5j
+"noremap <Up>   5k 
+"map <ScrollWheelUp>   5<C-y>
+"map <ScrollWheelDown> 5<C-e>
+set mouse=a
+
+
+
+"""""""""""""""""""""""""""""""""""""
+"             UNDO                  "
+"""""""""""""""""""""""""""""""""""""
+set undofile
+set hidden
+set undodir=~/.vim_undo
 
 """""""""""""""""""""""""""""""""""""
 "             FONT                  "
@@ -158,7 +178,7 @@ function HoTT()
 endfunction 
 command HOTT :exe HoTT()
 
-nmap <leader>l :CoqToTop<cr>:CoqToLine<cr>
+nmap <leader>l :RocqToTop<cr>:RocqToLine<cr>
 filetype plugin on 
 filetype indent on 
 syntax on 

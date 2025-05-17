@@ -120,10 +120,16 @@ ghasshee() {
 ####################
 alias pull='     git pull   '
 alias push='     make clean; git add --all; git commit -m "Updated"; git push '
-alias commit='   git add --all; git commit -m "Updated"           '
 gitglobal() {git config --global user.email "${1}@gmail.com"; git config --global user.name $1; }
-
-
+commit() { 
+    [[ $1 == '-m' ]] && {
+        COMMIT_MSG=$2
+    } || {
+        COMMIT_MSG="Updated"
+    } 
+    git add --all
+    git commit -m $COMMIT_MSG
+}
 
 ####################
 ###     Nix      ###
