@@ -6,6 +6,7 @@ source $HOME/.private.zsh
 source $HOME/ghasshee/dotfiles/.env.zsh
 source $DOT/.path.zsh
 
+
 #################
 ### OH-MY-ZSH ###
 #################
