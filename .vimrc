@@ -18,22 +18,27 @@ if $COLORTERM == 'gnome-terminal'
     set t_Co=256
 endif
 
+
 try
-colorscheme mayansmoke
-"colorscheme elflord
-":colorscheme pablo
+"colorscheme mayansmoke  "white
+"colorscheme elflord      "black lightblue
+"colorscheme pablo
 "colorscheme ir_black
-colorscheme desert
-colorscheme peaksea
-"colorscheme morning
-"colorscheme delek
-""colorscheme ron
-""colorscheme pyte
-""colorscheme zellner
+"colorscheme desert
+"colorscheme peaksea
+"colorscheme ron
+"colorscheme pyte
+"colorscheme solarized
+"colorscheme jellybeans
+"colorscheme molokai
+"colorscheme github
+colorscheme gruvbox
+
 catch
 endtry
 
 set background=dark
+"set termguicolors
 
 if has("gui_running")       " gvim 
     set guioptions-=T
